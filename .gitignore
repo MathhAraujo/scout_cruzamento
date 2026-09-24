@@ -1,0 +1,28 @@
+# Datasets
+*.csv
+sirp600.csv
+SIRP-600.csv
+data/
+
+# Scripts de build internos
+build_notebook.py
+
+# Python & Jupyter
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+*.egg-info/
+dist/
+build/
+
+# Ambientes virtuais
+.venv/
+venv/
+ENV/
+
+# Sistema e IDEs
+.vscode/
+.idea/
+.system_generated/
+*.log
