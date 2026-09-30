@@ -1,8 +1,10 @@
 # Datasets
 *.csv
+*.parquet
 sirp600.csv
 SIRP-600.csv
 data/
+soccermon/data/
 
 # Scripts de build internos
 build_notebook.py
