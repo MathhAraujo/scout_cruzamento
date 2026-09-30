@@ -12,11 +12,11 @@ Este módulo contém a investigação analítica detalhada sobre as relações e
 
 > [!WARNING]
 > ### ⚠️ Nota Fundamental de Escopo e Limitação Científica
-> **Este estudo possui finalidade estritamente exploratória e analítica.**
+> **Este estudo possui finalidade estritamente exploratória, científica e analítica.**
 > 
-> As análises, métricas probabilísticas e pesos obtidos refletem **correlações estatísticas e associações de padrões no conjunto de dados analisado**. 
-> **ESTE MODELO NÃO DEVE SER UTILIZADO COMO SISTEMA PREDITIVO EM PRODUÇÃO OU PARA TOMADA DE DECISÃO CLÍNICA/MÉDICA.** 
-> Correlação estatística **não implica relação de causalidade direta**. A transição de um estudo observacional para uma ferramenta de predição diagnóstica exigiria ensaios clínicos prospectivos, validação em coortes longitudinais reais e acompanhamento médico individualizado.
+> * **Correlação $\neq$ Causalidade:** As associações estatísticas, coeficientes de correlação (Pearson/Spearman), pesos de árvores de decisão e valores SHAP obtidos refletem padrões empíricos multivariados na base analisada, não estabelecendo nexo causal determinístico direto.
+> * **Não Aptidão para Tomada de Decisão Clínica Autônoma:** **ESTE MODELO NÃO DEVE SER UTILIZADO COMO SISTEMA PREDITIVO EM PRODUÇÃO OU PARA DIAGNÓSTICO/PRESCRIÇÃO MÉDICA/FISIOTERÁPICA AUTÔNOMA.**
+> * **Necessidade de Ensaios Prospectivos:** A transição de um modelo observacional em dados esportivos para uma ferramenta de intervenção preventiva exige ensaios clínicos prospectivos (*blinded prospective clinical trials*), auditoria clínica continuada e validação multidisciplinar com médicos e preparadores físicos.
 
 ---
 
@@ -29,7 +29,6 @@ Este módulo contém a investigação analítica detalhada sobre as relações e
 6. [Pesos das Variáveis e Interpretabilidade com SHAP](#pesos-das-variáveis-e-interpretabilidade-com-shap)
 7. [Estratificação Teórica de Risco](#estratificação-teórica-de-risco)
 8. [Ressalvas e Limitações Metodológicas](#ressalvas-e-limitações-metodológicas)
-9. [Estrutura do Módulo e Como Executar](#estrutura-do-módulo-e-como-executar)
 
 ---
 
@@ -205,46 +204,4 @@ Para fins puramente ilustrativos da variação contínua gerada pelo modelo (0% 
 
 ---
 
-## 💻 Estrutura do Módulo e Como Executar
-
-```
-📁 sirp-600/
-├── 📄 README.md                            # Documentação científica do cruzamento SIRP-600
-├── 📊 sirp600.csv                          # Dataset ML-Ready SIRP-600 (600 atletas)
-├── 🐍 build_notebook.py                    # Script de automação e geração do notebook
-├── 📁 figures/                             # Imagens e gráficos exportados em 300 DPI
-│   ├── 🖼️ matriz_correlacao_e_ranking.png
-│   ├── 🖼️ distribuicoes_kde_fatores_risco.png
-│   ├── 🖼️ metricas_avaliacao_calibracao.png
-│   ├── 🖼️ feature_importance_rf.png
-│   ├── 🖼️ shap_summary_beeswarm.png
-│   └── 🖼️ shap_summary_bar.png
-└── 📁 notebooks/                           # Notebook Jupyter completo e documentado (7 células)
-    └── 📓 analise_risco_lesao_sirp600.ipynb
-```
-
-### Como Executar Localmente:
-
-1. **A partir da raiz do repositório Scout, acesse a pasta do dataset:**
-   ```bash
-   cd sirp-600
-   ```
-
-2. **Instale as dependências analíticas (caso ainda não estejam instaladas):**
-   ```bash
-   pip install numpy pandas scikit-learn matplotlib seaborn shap nbformat jupyter
-   ```
-
-3. **Execute o Jupyter Notebook:**
-   ```bash
-   jupyter notebook notebooks/analise_risco_lesao_sirp600.ipynb
-   ```
-   *(Ou abra diretamente no VS Code / Cursor selecionando o kernel Python 3).*
-
-Todas as 7 células são independentes, utilizam `n_jobs=-1` para aceleração em todos os núcleos da CPU e salvam os gráficos atualizados automaticamente na pasta `figures/`.
-
----
-
-[⬅️ Voltar ao Hub Principal do Repositório Scout](../README.md)
-
-**Autor / Cientista de Dados:** Projeto Scout — Sports Analytics & Machine Learning Research.
+[⬅️ Voltar ao Hub Geral do Repositório Scout](../README.md)

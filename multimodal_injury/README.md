@@ -6,19 +6,19 @@
 [![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-v1.9.1-F7931E.svg?logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
 [![SHAP](https://img.shields.io/badge/SHAP-TreeExplainer-red.svg)](https://shap.readthedocs.io/)
 [![Kaggle Dataset](https://img.shields.io/badge/Dataset-Multimodal%20Sports%20Injury-brightgreen.svg)](https://www.kaggle.com/datasets/anjalibhegam/multimodal-sports-injury-dataset)
-[![Status](https://img.shields.io/badge/Status-Estudo%20Analítico%20Concluído-blue.svg)](#-alerta-metodológico-rigoroso)
+[![Status](https://img.shields.io/badge/Status-Estudo%20Analítico%20Concluído-blue.svg)](#ressalvas-e-limitações-metodológicas)
 
 Este módulo implementa uma investigação aprofundada de Sports Analytics e Machine Learning sobre o **Multimodal Sports Injury Prediction Dataset** (Kaggle: `anjalibhegam/multimodal-sports-injury-dataset`), analisando as interações não lineares entre **séries temporais de recuperação fisiológica e sono (HRV Proxy, qualidade do sono)** e **métricas de carga externa e percepção subjetiva de esforço (ACWR, RPE, fadiga acumulada)** na estimativa contínua da probabilidade de risco de lesão musculoesquelética (0% a 100%).
 
 ---
 
 > [!WARNING]
-> ### ⚠️ ALERTA METODOLÓGICO RIGOROSO
-> **Este estudo possui finalidade estritamente exploratória, científica e investigativa.**
+> ### ⚠️ Nota Fundamental de Escopo e Limitação Científica
+> **Este estudo possui finalidade estritamente exploratória, científica e analítica.**
 > 
-> * **Correlação $\neq$ Causalidade:** As associações estatísticas, coeficientes monotônicos de Spearman e pesos SHAP obtidos refletem correlações empíricas multivariadas no conjunto de dados, não estabelecendo nexo causal determinístico direto.
-> * **Não Aptidão para Uso Clínico/Preditivo Autônomo:** **ESTE MODELO NÃO DEVE SER UTILIZADO COMO SISTEMA PREDITIVO EM PRODUÇÃO OU PARA TOMADA DE DECISÃO CLÍNICA/MÉDICA AUTÔNOMA.**
-> * **Necessidade de Ensaios Prospectivos:** A transição de um estudo observacional em dados de sensores para uma ferramenta médica de predição diagnóstica exigiria ensaios clínicos prospectivos cegos (*blinded prospective trials*), validação em coortes longitudinais com prontuários auditados e acompanhamento médico e fisioterápico individualizado.
+> * **Correlação $\neq$ Causalidade:** As associações estatísticas, coeficientes de correlação (Spearman/Pearson), pesos de árvores de decisão e valores SHAP obtidos refletem padrões empíricos multivariados na base analisada, não estabelecendo nexo causal determinístico direto.
+> * **Não Aptidão para Tomada de Decisão Clínica Autônoma:** **ESTE MODELO NÃO DEVE SER UTILIZADO COMO SISTEMA PREDITIVO EM PRODUÇÃO OU PARA DIAGNÓSTICO/PRESCRIÇÃO MÉDICA/FISIOTERÁPICA AUTÔNOMA.**
+> * **Necessidade de Ensaios Prospectivos:** A transição de um modelo observacional em dados esportivos para uma ferramenta de intervenção preventiva exige ensaios clínicos prospectivos (*blinded prospective clinical trials*), auditoria clínica continuada e validação multidisciplinar com médicos e preparadores físicos.
 
 ---
 
@@ -31,7 +31,7 @@ Este módulo implementa uma investigação aprofundada de Sports Analytics e Mac
 6. [Galeria Visual Completa e Discussão dos Resultados](#-galeria-visual-completa-e-discussão-dos-resultados)
 7. [Comparativo Intermódulos: SIRP-600 vs SoccerMon vs Multimodal](#-comparativo-intermódulos-sirp-600-vs-soccermon-vs-multimodal)
 8. [Inferência Operacional e Estratificação Clínica de Risco](#-inferência-operacional-e-estratificação-clínica-de-risco)
-9. [Estrutura do Módulo e Como Executar](#-estrutura-do-módulo-e-como-executar)
+9. [Ressalvas e Limitações Metodológicas](#-ressalvas-e-limitações-metodológicas)
 
 ---
 
@@ -237,39 +237,16 @@ resultado = estimar_risco_lesao_rotina(
 
 ---
 
-## 💻 Estrutura do Módulo e Como Executar
+## 🚫 Ressalvas e Limitações Metodológicas
 
-```text
-📁 multimodal_injury/
-├── 📄 README.md                                  # Documentação científica completa do módulo
-├── 📓 multimodal_sports_injury_pipeline.ipynb   # Jupyter Notebook executado com saídas e gráficos
-├── 📊 multimodal_sports_injury_dataset.csv      # Dataset baixado programaticamente via Kaggle API
-└── 📁 figures/                                  # Suíte de 7 figuras em alta resolução (300 DPI)
-    ├── 🖼️ metricas_avaliacao_calibracao.png
-    ├── 🖼️ matriz_correlacao_e_ranking.png
-    ├── 🖼️ distribuicoes_kde_fatores_risco.png
-    ├── 🖼️ feature_importance_rf.png
-    ├── 🖼️ shap_summary_beeswarm.png
-    ├── 🖼️ shap_summary_bar.png
-    └── 🖼️ interacao_sono_acwr.png
-```
-
-### Reprodução Local:
-1. Navegue até a pasta do módulo a partir da raiz do repositório:
-   ```bash
-   cd multimodal_injury
-   ```
-2. Instale as dependências analíticas:
-   ```bash
-   pip install numpy pandas scikit-learn matplotlib seaborn shap nbformat nbclient kaggle
-   ```
-3. Abra e execute o notebook:
-   ```bash
-   jupyter notebook multimodal_sports_injury_pipeline.ipynb
-   ```
+> [!CAUTION]
+> ### Por que este modelo NÃO deve ser considerado pronto para predição no mundo real?
+> 
+> 1. **Natureza Sintética e Observacional:** O conjunto multimodal reflete padrões realistas simulados com base em distribuições de literatura, servindo como demonstrador de modelagem e calibração estocástica.
+> 2. **Variabilidade Individual de Biomarcadores:** Limiares ótimos de HRV (tônus vagal) e ACWR possuem variabilidade interindividual expressiva; respostas basais diferem amplamente entre atletas de elite.
+> 3. **Correlação $\neq$ Causalidade:** A identificação empírica de fatores de risco não implica causalidade isolada; múltiplos fatores extrínsecos e intrínsecos não medidos interagem na gênese da lesão.
+> 4. **Necessidade de Ensaios Clínicos Prospectivos:** A adoção de ferramentas de suporte à decisão clínica exige ensaios controlados com comissões de saúde esportiva.
 
 ---
 
 [⬅️ Voltar ao Hub Geral do Repositório Scout](../README.md)
-
-**Autor / Cientista de Dados:** Projeto Scout — Sports Analytics & Machine Learning Research.

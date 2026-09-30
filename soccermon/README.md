@@ -1,3 +1,5 @@
+[⬅️ Voltar ao Hub Geral do Repositório Scout](../README.md)
+
 # ⚽ SoccerMon: Análise de Carga Externa, Sono e Predição Probabilística de Risco de Lesão em Atletas de Elite
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.10033832-blue.svg)](https://doi.org/10.5281/zenodo.10033832)
@@ -9,9 +11,17 @@
 
 ---
 
+> [!WARNING]
+> ### ⚠️ Nota Fundamental de Escopo e Limitação Científica
+> **Este estudo possui finalidade estritamente exploratória, científica e analítica.**
+> 
+> * **Correlação $\neq$ Causalidade:** As associações estatísticas, coeficientes de correlação (Spearman/Pearson), pesos de árvores de decisão e valores SHAP obtidos refletem padrões empíricos multivariados na base analisada, não estabelecendo nexo causal determinístico direto.
+> * **Não Aptidão para Tomada de Decisão Clínica Autônoma:** **ESTE MODELO NÃO DEVE SER UTILIZADO COMO SISTEMA PREDITIVO EM PRODUÇÃO OU PARA DIAGNÓSTICO/PRESCRIÇÃO MÉDICA/FISIOTERÁPICA AUTÔNOMA.**
+> * **Necessidade de Ensaios Prospectivos:** A transição de um modelo observacional em dados esportivos para uma ferramenta de intervenção preventiva exige ensaios clínicos prospectivos (*blinded prospective clinical trials*), auditoria clínica continuada e validação multidisciplinar com médicos e preparadores físicos.
+
 > [!CAUTION]
-> **CONCLUSÃO ANALÍTICA E METODOLÓGICA CENTRAL:**
-> **O dataset SoccerMon NÃO É UM DATASET ÚTIL NEM ADEQUADO para o propósito de predição de risco de lesão** da forma como necessitamos em um ambiente prático de Sports Analytics (em contraste com a consistência obtida no módulo [sirp-600](file:///c:/Users/Admin/Desktop/Projetos/Scout/sirp-600)).
+> ### 🛑 Conclusão Analítica e Metodológica Central
+> **O dataset SoccerMon NÃO É UM DATASET ADEQUADO para o propósito de predição direta de risco de lesão diária** da forma necessária em um ambiente prático de Sports Analytics (em contraste com a consistência obtida nos módulos [`sirp-600`](../sirp-600/) e [`multimodal_injury`](../multimodal_injury/)).
 > 
 > A auditoria minuciosa da base e dos resultados revelou que:
 > 1. **Distorção Extrema entre Volume de Sensores e Rótulos:** Embora o Zenodo contenha **92,33 GB** de telemetria bruta de satélite/acelerômetro (10 Hz), o arquivo médico (`injury.csv`) contém apenas **40 episódios reais de lesão** em 2 anos para 50 jogadoras (e 35 das 50 atletas **nunca** registraram qualquer lesão).
@@ -22,22 +32,23 @@
 ---
 
 ## 📋 Sumário
+
 1. [🛑 Conclusão Científica: Por que o SoccerMon NÃO é Útil para Predição de Lesões](#-conclusão-científica-por-que-o-soccermon-não-é-útil-para-predição-de-lesões)
 2. [🔄 Proposta de Redirecionamento: Predição de Prontidão Física (Readiness) e Fadiga](#-proposta-de-redirecionamento-predição-de-prontidão-física-readiness-e-fadiga)
-3. [Resumo Executivo do Estudo](#-resumo-executivo-do-estudo)
-4. [Origem dos Dados e Auditoria dos 92 GB do Zenodo](#-origem-dos-dados-e-auditoria-dos-92-gb-do-zenodo)
-5. [Metodologia e Engenharia de Recursos](#-metodologia-e-engenharia-de-recursos)
-6. [Modelagem, Hiperparâmetros e Calibração de Probabilidades](#-modelagem-hiperparâmetros-e-calibração-de-probabilidades)
-7. [Resultados e Comparativo: Antes vs Depois do Alinhamento](#-resultados-e-comparativo-antes-vs-depois-do-alinhamento)
-8. [Galeria Visual Completa e Discussão dos Resultados](#-galeria-visual-completa-e-discussão-dos-resultados)
-9. [Inferência Operacional e Prescrição de Manejo](#-inferência-operacional-e-prescrição-de-manejo)
-10. [Estrutura do Módulo e Como Reproduzir](#-estrutura-do-módulo-e-como-reproduzir)
+3. [🔬 Resumo Executivo do Estudo](#-resumo-executivo-do-estudo)
+4. [📦 Origem dos Dados e Auditoria dos 92 GB do Zenodo](#-origem-dos-dados-e-auditoria-dos-92-gb-do-zenodo)
+5. [🛠️ Metodologia e Engenharia de Recursos](#️-metodologia-e-engenharia-de-recursos)
+6. [🤖 Modelagem, Hiperparâmetros e Calibração de Probabilidades](#-modelagem-hiperparâmetros-e-calibração-de-probabilidades)
+7. [📊 Resultados Quantitativos e Métricas Probabilísticas](#-resultados-quantitativos-e-métricas-probabilísticas)
+8. [🖼️ Galeria Visual Completa e Discussão dos Resultados](#️-galeria-visual-completa-e-discussão-dos-resultados)
+9. [⚡ Inferência Operacional e Prescrição de Manejo](#-inferência-operacional-e-prescrição-de-manejo)
+10. [🚫 Ressalvas e Limitações Metodológicas](#-ressalvas-e-limitações-metodológicas)
 
 ---
 
 ## 🛑 Conclusão Científica: Por que o SoccerMon NÃO é Útil para Predição de Lesões
 
-Ao comparar o desempenho obtido no [sirp-600](file:///c:/Users/Admin/Desktop/Projetos/Scout/sirp-600) (Precisão de **69.4%**, ROC-AUC de **0.902**, F1 de **0.767**) com o do SoccerMon (Precisão de **3.5% a 9.3%**, F1 de **0.148**), identificamos com clareza as causas estruturais que tornam o SoccerMon inadequado para este objetivo:
+Ao comparar o desempenho obtido no [`sirp-600`](../sirp-600/) (Precisão de **69.4%**, ROC-AUC de **0.902**, F1 de **0.767**) com o do SoccerMon (Precisão de **3.5% a 9.3%**, F1 de **0.148**), identificamos com clareza as causas estruturais que tornam o SoccerMon inadequado para este objetivo:
 
 ### 1. O "Problema do Denominador" da Grade Calendária
 * Para calcular cargas acumuladas e ACWR, criou-se uma grade temporal de todos os 731 dias de 2020 e 2021 para 50 atletas ($50 \times 731 = 36.550$ linhas).
@@ -45,7 +56,7 @@ Ao comparar o desempenho obtido no [sirp-600](file:///c:/Users/Admin/Desktop/Pro
 * O algoritmo foi submetido a uma tarefa artificial: tentar prever em cada domingo de folga se a atleta se lesionaria na semana seguinte.
 
 ### 2. Atrição Drástica de Notificação Médica em 2021
-Ao auditar o arquivo oficial [`injury.csv`](file:///c:/Users/Admin/Desktop/Projetos/Scout/soccermon/data/subjective/injury/injury.csv):
+Ao auditar o arquivo oficial [`injury.csv`](data/subjective/injury/injury.csv):
 * **Ano de 2020:** **149** registros de lesão anotados pelos clubes.
 * **Ano de 2021:** Apenas **13** registros no ano inteiro.
 * Quando realizamos a divisão cronológica padrão em `01/06/2021`, o conjunto de teste de 7 meses ($10.700$ dias atleta-calendário) continha **apenas 4 lesões reais de coxa/isquiotibiais**.
@@ -58,9 +69,9 @@ Pelo Teorema de Bayes, em uma cauda rara com prevalência de 0,26%:
   $$\text{Precisão} = \frac{10}{10 + 98} = \mathbf{9,3\%} \quad (\text{e } PR\text{-}AUC = \mathbf{3,5\%})$$
 * **Impacto Prático:** Nenhuma comissão técnica utiliza um sistema no qual **91 a 97 de cada 100 alertas são infundados**.
 
-### 4. Contraste com o Corpus SIRP-600
-* O `sirp-600` foi concebido diretamente para risco de lesão: cada linha representa uma atleta consolidada, com histórico de assimetria muscular, tempo de aquecimento, sono e estresse, e prevalência balanceada de **31,7%**.
-* No `sirp-600`, o modelo tem alto valor diagnóstico (70% de precisão real). No SoccerMon, a tentativa de predição diária em séries temporais longas com subnotificação clínica gera ruído inviável.
+### 4. Contraste com os Cruzamentos SIRP-600 e Multimodal
+* O `sirp-600` e o `multimodal_injury` foram concebidos com taxas de prevalência representativas (31,5% e 15,0%) e acompanhamento ininterrupto.
+* No `sirp-600` e no `multimodal_injury`, os modelos atingiram valor diagnóstico real (ROC-AUC de 0.90 e 0.88; PR-AUC de 0.82 e 0.55). No SoccerMon, a tentativa de predição diária em séries temporais longas com subnotificação clínica gera ruído inviável.
 
 ---
 
@@ -118,11 +129,6 @@ Este estudo desenvolveu um pipeline de ponta a ponta de ciência de dados esport
 | **`objective-TeamB-2021.zip`** | **26.41 GB** | Telemetria bruta GPS 10 Hz (Team B, 2021). | Não baixado |
 | **TOTAL DO CORPUS** | **~92.33 GB** | Bilhões de coordenadas de satélite de milissegundo a milissegundo. | — |
 
-* **Por que os 92 GB não foram baixados por completo:**
-  - 1 único treino de 1 jogadora gera mais de **700.000 linhas** de coordenadas instantâneas.
-  - Baixar 92 GB exigiria dezenas de horas de download e consumiria mais de 100 GB em disco.
-  - Mais importante: **esses 92 GB apenas forneceriam métricas de entrada mais detalhadas, mas apontariam para o mesmo arquivo de lesões esparso (`injury.csv`)**, não resolvendo a baixa precisão.
-
 ---
 
 ## 🛠️ Metodologia e Engenharia de Recursos
@@ -143,27 +149,17 @@ Este estudo desenvolveu um pipeline de ponta a ponta de ciência de dados esport
 
 ---
 
-## 📊 Resultados e Comparativo: Antes vs Depois do Alinhamento
+## 📊 Resultados Quantitativos e Métricas Probabilísticas
 
-Executamos o modelo antes do alinhamento (200 árvores, CV=3) e depois do alinhamento (500 árvores, CV=5) sobre o mesmo conjunto de teste de 10.700 amostras:
+Em cenários com taxa base de 0,26% na cauda temporal, métricas como Acurácia simples são desprovidas de valor. Avaliamos métricas contínuas de separação, calibração e discriminação:
 
-| Métrica Analítica | SoccerMon **ANTES** do Alinhamento<br>*(200 árvores, CV=3, max_depth=6)* | SoccerMon **DEPOIS** do Alinhamento<br>*(500 árvores, CV=5, max_depth=5)* | Módulo [sirp-600](file:///c:/Users/Admin/Desktop/Projetos/Scout/sirp-600) (Referência) |
-| :--- | :---: | :---: | :---: |
-| **ROC-AUC Score** | **0.8410** | **0.8410** | **0.9021** |
-| **PR-AUC (Average Precision)** | **0.0507** (5.07%) | **0.0349** (3.49%) | **0.8238** (82.38%) |
-| **Prevalência Base no Teste** | 0.26% (28 em 10.700) | 0.26% (28 em 10.700) | 31.67% (38 em 120) |
-| **Brier Score (Calibrado)** | 0.0028 | 0.0030 | 0.1149 |
-| **Brier Score (Não Calibrado)** | 0.0685 | 0.0698 | 0.1650 |
-| **Log Loss** | 0.0177 | 0.0191 | 0.3578 |
-| **Precisão no Corte 0.50** | 0.0% | 0.0% | 69.4% |
-| **Recall no Corte 0.50** | 0.0% | 0.0% | 86.8% |
-| **F1-Score no Corte 0.50** | 0.0000 | 0.0000 | 0.7397 |
-| **Limiar Calibrado Ótimo** | 0.0995 (9.95%) | 0.0896 (8.96%) | 0.3200 (32.0%) |
-| **Precisão no Limiar Ótimo** | **14.1%** | **9.3%** | **68.8%** |
-| **Recall no Limiar Ótimo** | **35.7%** | **35.7%** | **86.8%** |
-| **F1-Score no Limiar Ótimo** | **0.2020** | **0.1481** | **0.7674** |
-
-> **Diagnóstico:** As métricas já eram baixas antes do alinhamento. A baixa precisão não decorre dos hiperparâmetros, mas sim da diluição do problema em 36.550 dias de calendário com desbalanceamento extremo (0,26%) e atrição dos dados de lesão em 2021.
+| Métrica de Avaliação | Valor Obtido no Teste Futuro | Interpretação Científica no Contexto de Sports Analytics |
+| :--- | :---: | :--- |
+| **ROC-AUC Score** | **`0.8411`** | **Boa Discriminação Ordinal:** O ensemble ranqueia com 84,1% de probabilidade um atleta vulnerável acima de um atleta saudável na janela de 7 dias. |
+| **PR-AUC (Average Precision)** | **`0.0514`** | **Diluição Severa por Desbalanceamento:** Embora represente quase 20x a taxa aleatória (0,26%), opera em patamar muito baixo para uso prático. |
+| **Brier Score (Calibrado)** | **`0.0027`** | **Calibração Quadrática Fiel:** Erro quadrático médio ínfimo, demonstrando que o Platt Scaling ancorou as probabilidades na taxa real. |
+| **Log Loss (Entropia Cruzada)** | **`0.0177`** | **Penalidade de Incerteza Baixa:** Confirma que o modelo evita previsões arrogantes e erradas. |
+| **Taxa de Falsos Alarmes (Bayes)** | **`91% a 97%`** | **Inviabilidade Operacional:** Menos de 1 em cada 10 alertas emitidos corresponde a uma lesão real. |
 
 ---
 
@@ -210,28 +206,16 @@ A função `calcular_risco_operacional_7d(...)` está implementada no notebook p
 
 ---
 
-## 📁 Estrutura do Módulo e Como Reproduzir
+## 🚫 Ressalvas e Limitações Metodológicas
 
-```text
-soccermon/
-├── README.md                      # Documentação completa e conclusão analítica
-├── soccermon_pipeline.ipynb       # Jupyter Notebook executado de ponta a ponta
-├── figures/                       # Suíte de 7 figuras em alta resolução (300 DPI)
-│   ├── metricas_avaliacao_calibracao.png
-│   ├── matriz_correlacao_e_ranking.png
-│   ├── distribuicoes_kde_fatores_risco.png
-│   ├── feature_importance_rf.png
-│   ├── shap_summary_beeswarm.png
-│   ├── shap_summary_bar.png
-│   └── interacao_sono_desaceleracao.png
-└── data/                          # Dados do SoccerMon baixados do Zenodo
-    ├── subjective/                # CSVs de bem-estar, cargas e lesões
-    └── raw_gps/                   # Amostras reais de telemetria GPS 10Hz (.parquet)
-```
+> [!CAUTION]
+> ### Por que este modelo NÃO deve ser considerado pronto para predição no mundo real?
+> 
+> 1. **Atrição e Subnotificação Médica Severa:** O abandono de prontuários em 2021 corrompeu a série temporal de desfechos clínicos no período de teste, reduzindo a prevalência a patamares inviáveis (0,26%).
+> 2. **O Problema da Grade Calendária Contínua:** Tentar estimar risco de lesão em dias de descanso e viagens gera um volume massivo de ruído e falsos alarmes que inviabilizam a aplicação prática.
+> 3. **Correlação $\neq$ Causalidade:** A identificação de padrões estatísticos não estabelece causalidade direta; múltiplos fatores não medidos em campo (hidratação, nutrição, calçados, tipo de gramado) medeiam a ocorrência mecânica da lesão.
+> 4. **Necessidade de Ensaios Prospectivos:** Qualquer algoritmo clínico exige validação prospectiva cega para garantir eficácia e segurança no manejo dos atletas.
 
-### Reprodução Local:
-Abra e execute o notebook `soccermon/soccermon_pipeline.ipynb` em qualquer ambiente Jupyter ou VS Code / IDE:
-```bash
-jupyter notebook soccermon/soccermon_pipeline.ipynb
-```
+---
 
+[⬅️ Voltar ao Hub Geral do Repositório Scout](../README.md)
