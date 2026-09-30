@@ -3,11 +3,14 @@
 *.parquet
 sirp600.csv
 SIRP-600.csv
+multimodal_sports_injury_dataset.csv
+multimodal_injury/multimodal_sports_injury_dataset.csv
 data/
 soccermon/data/
 
 # Scripts de build internos
 build_notebook.py
+build_and_run_pipeline.py
 
 # Python & Jupyter
 __pycache__/

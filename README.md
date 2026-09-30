@@ -43,6 +43,7 @@ Abaixo estão listados os estudos analíticos e cruzamentos de dados atualmente 
 | :--- | :--- | :---: | :--- | :---: | :---: |
 | [`sirp-600/`](sirp-600/) | **Predição de Risco de Lesão Esportiva** | 600 atletas | Random Forest, Platt Scaling (`CalibratedClassifierCV`), SHAP | Concluído | [Acessar Estudo](sirp-600/README.md) |
 | [`soccermon/`](soccermon/) | **Carga Externa (GPS), Sono e Risco de Lesão (7d)** | 50 atletas (36.550 atleta-dias) | Random Forest, Platt Scaling (`CalibratedClassifierCV`), SHAP, ACWR | Concluído (Diagnóstico Crítico) | [Acessar Estudo](soccermon/README.md) |
+| [`multimodal_injury/`](multimodal_injury/) | **Carga (ACWR, RPE), Sono e Recuperação Autonômica (HRV)** | 156 atletas (15.420 sessões) | Random Forest, Platt Scaling (`CalibratedClassifierCV`), SHAP, Gabbett ACWR | Concluído | [Acessar Estudo](multimodal_injury/README.md) |
 
 ---
 
@@ -82,6 +83,25 @@ Investigação longitudinal do cruzamento multivariado entre variáveis cinemát
 
 > 📖 **Para conferir a análise detalhada, comprovação matemática do desbalanceamento e os 7 painéis visuais comentados:**  
 > 👉 [Consulte o README do SoccerMon](soccermon/README.md)
+
+---
+
+### 3. `multimodal_injury` — Multimodal Sports Injury Prediction
+
+* **Pasta do Estudo:** [`📁 multimodal_injury/`](multimodal_injury/)
+* **Documentação Científica:** [`📄 multimodal_injury/README.md`](multimodal_injury/README.md)
+* **Notebook Principal:** [`📓 multimodal_injury/multimodal_sports_injury_pipeline.ipynb`](multimodal_injury/multimodal_sports_injury_pipeline.ipynb)
+
+#### 🎯 Resumo da Investigação
+Investigação longitudinal do cruzamento multivariado entre métricas de carga de treinamento (razão ACWR $ATL_7 / CTL_{28}$, intensidade subjetiva RPE, fadiga sistêmica) e parâmetros de recuperação e rotina via sensores vestíveis (qualidade do sono, escore de recuperação autonômica / HRV proxy) em 156 atletas monitorados ao longo de 6 meses (15.420 sessões).
+
+#### 📊 Principais Conclusões e Métricas
+* **Fatores Críticos:** O **Escore de Recuperação Autonômica / HRV Proxy ($\rho = -0.323$, >18% Gini)** e a **Qualidade do Sono ($\rho = -0.278$)** são os maiores fatores protetores. Por outro lado, o **Índice de Fadiga ($\rho = +0.334$)**, a **Carga Total ($\rho = +0.228$)** e picos de **ACWR ($\rho = +0.142$)** representam os principais impulsionadores de risco.
+* **Performance Probabilística:** O modelo calibrado com Platt Scaling atingiu **$\text{ROC-AUC} = 0.8806$**, **$\text{PR-AUC} = 0.5494$** (3,66x a prevalência base de 15,01%), **$\text{Brier Score} = 0.0932$** e **$\text{Log Loss} = 0.3009$**.
+* **Interpretabilidade SHAP & Interação 2D:** A análise de contorno bidimensional comprovou que a sobrecarga mecânica aguda (ACWR $> 1.4$) é multiplicada não linearmente quando imposta sobre um organismo em colapso autonômico (recuperação $< 40$), elevando a probabilidade empírica de risco para além de 80% a 90%.
+
+> 📖 **Para conferir a análise detalhada, metodologia completa e todos os 7 painéis visuais comentados:**  
+> 👉 [Consulte o README do Multimodal Injury](multimodal_injury/README.md)
 
 ---
 
@@ -129,7 +149,18 @@ O repositório Scout está planejado para receber novos cruzamentos estatístico
 │   │   └── 🖼️ interacao_sono_desaceleracao.png
 │   └── 📁 data/                            # Dados do SoccerMon (baixados programaticamente via Zenodo)
 │       ├── 📁 subjective/                  # Bem-estar diário, cargas e prontuário de lesões
-│       └── 📁 raw_gps/                     # Amostras de telemetria GPS 10Hz (.parquet)
+├── 📁 multimodal_injury/                   # Módulo Multimodal Sports Injury Dataset
+│   ├── 📄 README.md                        # Documentação científica dedicada do estudo
+│   ├── 📓 multimodal_sports_injury_pipeline.ipynb # Jupyter Notebook executado com saídas e figuras
+│   ├── 📊 multimodal_sports_injury_dataset.csv # Base de dados (baixada via Kaggle API)
+│   └── 📁 figures/                         # Suíte de 7 figuras em alta resolução (300 DPI)
+│       ├── 🖼️ metricas_avaliacao_calibracao.png
+│       ├── 🖼️ matriz_correlacao_e_ranking.png
+│       ├── 🖼️ distribuicoes_kde_fatores_risco.png
+│       ├── 🖼️ feature_importance_rf.png
+│       ├── 🖼️ shap_summary_beeswarm.png
+│       ├── 🖼️ shap_summary_bar.png
+│       └── 🖼️ interacao_sono_acwr.png
 │
 └── 📁 [futuro-dataset]/                    # Próximos cruzamentos estruturados no mesmo padrão
     ├── 📄 README.md
