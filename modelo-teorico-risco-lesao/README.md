@@ -42,7 +42,7 @@ Em termos conceituais, uma exposição elevada poderia ser mais preocupante quan
 ## Variáveis candidatas
 
 | Eixo | Variáveis candidatas | Papel hipotético |
-|---|---|---|---|
+|---|---|---|
 | Vulnerabilidade estrutural | Assimetria muscular; histórico de lesões | Contextualizar a suscetibilidade basal do atleta. |
 | Recuperação | Escore de recuperação/HRV proxy e média móvel; qualidade e duração do sono | Representar o estado de recuperação recente. |
 | Fadiga e estresse | Fadiga sistêmica; estresse psicofisiológico | Complementar a descrição do estado de recuperação. |
