@@ -4,11 +4,11 @@
 [![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-v1.9.1-orange.svg)](https://scikit-learn.org/)
 [![SHAP](https://img.shields.io/badge/SHAP-v0.52.0-red.svg)](https://shap.readthedocs.io/)
 [![Arquitetura](https://img.shields.io/badge/Arquitetura-Multi--Dataset%20Modular-brightgreen.svg)](#-visão-geral-e-arquitetura)
-[![Status](https://img.shields.io/badge/Status-Estudos%20Concluídos-brightgreen.svg)](#-catálogo-de-cruzamentos-e-datasets)
+[![Status](https://img.shields.io/badge/Status-Estudos%20e%20Auditorias-blue.svg)](#-catálogo-de-cruzamentos-e-datasets)
 
 O **Scout** é um repositório centralizado e modular para ciência de dados esportivos (*Sports Analytics & Machine Learning*). O projeto reúne investigações empíricas, cruzamentos estatísticos multivariados e modelagem preditiva e probabilística aplicada a fatores de rendimento, controle de carga de treinamento, assimetrias biomecânicas e risco de lesões musculoesqueléticas em atletas.
 
-Para manter a escalabilidade e o rigor metodológico, **cada conjunto de dados analisado reside em seu próprio módulo dedicado**, contendo seus dados brutos e processados, suítes de visualização analítica (300 DPI), notebooks interativos reproduzíveis e documentação técnica aprofundada.
+Para manter a escalabilidade e o rigor metodológico, **cada conjunto de dados analisado reside em seu próprio módulo dedicado**, contendo seus dados brutos e processados, visualizações analíticas, notebooks interativos reproduzíveis e documentação técnica aprofundada.
 
 ---
 
@@ -19,9 +19,12 @@ Para manter a escalabilidade e o rigor metodológico, **cada conjunto de dados a
    - [SIRP-600 (Sports Injury Risk Prediction)](#1-sirp-600--sports-injury-risk-prediction)
    - [SoccerMon (Futebol Feminino de Elite)](#2-soccermon--soccer-athlete-health--load-monitoring)
    - [Multimodal Sports Injury (Carga, Sono e Recuperação Autonômica)](#3-multimodal_injury--multimodal-sports-injury-prediction)
-3. [Síntese Consolidada de Resultados: As Variáveis Mais Determinantes](#-síntese-consolidada-de-resultados-as-variáveis-mais-determinantes)
-   - [Tabela Geral de Preditores de Maior Relevância](#-tabela-geral-de-preditores-de-maior-relevância)
-   - [Detalhamento Conceitual, Fisiológico e Impacto Estatístico das Variáveis](#-detalhamento-conceitual-fisiológico-e-impacto-estatístico-das-variáveis)
+   - [Shalaj (Lesões de Isquiotibiais)](#4-shalaj--lesões-de-isquiotibiais)
+   - [University Football (Rotina e Condição Física)](#5-university_football--rotina-e-condição-física)
+   - [SoccerNet-GSR (Movimento por Vídeo)](#6-soccernet_gsr--movimento-por-vídeo)
+3. [Síntese Consolidada de Resultados: Classificação das Variáveis](#-síntese-consolidada-de-resultados-classificação-das-variáveis)
+   - [Tabela Geral de Variáveis e Evidências](#-tabela-geral-de-variáveis-e-evidências)
+   - [Detalhamento Conceitual e Impacto Estatístico das Variáveis](#-detalhamento-conceitual-e-impacto-estatístico-das-variáveis)
    - [A Dinâmica Não Linear: O Desacoplamento entre Demanda e Recuperação](#-a-dinâmica-não-linear-o-desacoplamento-entre-demanda-e-recuperação)
 4. [Comparativo Intermódulos e Lições sobre Viabilidade Amostral](#-comparativo-intermódulos-e-lições-sobre-viabilidade-amostral)
 5. [Ressalvas Científicas e Metodológicas](#-ressalvas-científicas-e-metodológicas)
@@ -34,7 +37,7 @@ O repositório é concebido sob o princípio de **módulos analíticos autoconti
 
 * **Independência Operacional:** Cada pasta correspondente a um dataset possui seu próprio pipeline de análise, dados, notebooks e figuras, permitindo executar e evoluir um estudo sem interferir nos demais.
 * **Documentação Dedicada:** Cada cruzamento conta com um `README.md` individual detalhando objetivos, análise exploratória (EDA), formulações matemáticas, interpretação visual das figuras e tabelas de métricas.
-* **Padronização Visual e Técnica:** Todas as análises seguem padrões consolidados de boas práticas: reprodutibilidade com sementes fixas, calibração de probabilidades contínuas (Platt Scaling), explicabilidade com valores SHAP e exportação de gráficos em alta resolução (300 DPI).
+* **Padronização Visual e Técnica:** Os módulos documentam seus métodos, métricas e limitações. Os estudos tabulares incluem Random Forest e calibração de probabilidades; os novos cruzamentos também incluem regressão logística e avaliação fora do treino (OOF). A explicação por SHAP pertence aos estudos anteriores; o SoccerNet-GSR apresenta análise cinemática descritiva.
 
 ---
 
@@ -45,8 +48,11 @@ Abaixo estão listados os estudos analíticos e cruzamentos de dados desenvolvid
 | Diretório / Dataset | Tema Central | Amostra | Algoritmos & Técnicas | Status | Link para Estudo |
 | :--- | :--- | :---: | :--- | :---: | :---: |
 | [`sirp-600/`](sirp-600/) | **Predição de Risco de Lesão Esportiva** | 600 atletas | Random Forest, Platt Scaling (`CalibratedClassifierCV`), SHAP | Concluído | [Acessar Estudo](sirp-600/README.md) |
-| [`soccermon/`](soccermon/) | **Carga Externa (GPS), Sono e Risco de Lesão (7d)** | 50 atletas (36.550 atleta-dias) | Random Forest, Platt Scaling (`CalibratedClassifierCV`), SHAP, ACWR | Concluído (Diagnóstico Crítico) | [Acessar Estudo](soccermon/README.md) |
+| [`soccermon/`](soccermon/) | **Carga Derivada de Sessões, Sono e Registro de Lesão (7d)** | 50 atletas (36.550 atleta-dias) | Random Forest, Platt Scaling (`CalibratedClassifierCV`), SHAP, ACWR | Concluído (Diagnóstico Crítico) | [Acessar Estudo](soccermon/README.md) |
 | [`multimodal_injury/`](multimodal_injury/) | **Carga (ACWR, RPE), Sono e Recuperação Autonômica (HRV)** | 156 atletas (15.420 sessões) | Random Forest, Platt Scaling (`CalibratedClassifierCV`), SHAP, Gabbett ACWR | Concluído | [Acessar Estudo](multimodal_injury/README.md) |
+| [`shalaj/`](shalaj/) | **Testes de Pré-Temporada e Lesão de Isquiotibiais** | 143 atletas (40 com lesão) | Regressão logística, Random Forest calibrada, Spearman, Fisher | Cruzamento concluído; validação interna | [Acessar Estudo](shalaj/README.md) |
+| [`university_football/`](university_football/) | **Rotina, Condição Física e Rótulo de Risco** | 800 registros | Regressão logística, Random Forest calibrada, Spearman | Cruzamento exploratório concluído; alvo incerto | [Acessar Estudo](university_football/README.md) |
+| [`soccernet_gsr/`](soccernet_gsr/) | **Posições, Trajetórias e Cinemática no Campo** | 164 clips (3.481 trajetórias locais) | Junção de frames e anotações, derivadas suavizadas | Cruzamento cinemático concluído; sem alvo clínico | [Acessar Estudo](soccernet_gsr/README.md) |
 
 ---
 
@@ -60,9 +66,9 @@ Abaixo estão listados os estudos analíticos e cruzamentos de dados desenvolvid
 Investigação empírica das interações entre variáveis comportamentais de rotina (sono, aquecimento, intensidade de treino), dimensões antropométricas, fisiológicas (tempo de recuperação cardíaca) e mecânicas funcionais (assimetria muscular contralateral) na ocorrência de lesões musculares e articulares.
 
 #### 📊 Principais Conclusões e Métricas
-* **Fatores Críticos:** A **Assimetria Muscular Contralateral ($r = +0.374$, 17.9% Gini)** e o **Histórico de Lesões ($r = +0.307$)** revelaram-se os maiores impulsionadores de risco. Por outro lado, **Tempo de Aquecimento ($r = -0.273$)** e **Horas de Sono ($r = -0.270$)** atuam como fortes moduladores protetores.
-* **Performance Probabilística:** O modelo calibrado atingiu **$\text{ROC-AUC} = 0.9021$**, **$\text{PR-AUC} = 0.8238$** e **$\text{Brier Score} = 0.1149$**, assegurando estimativas de risco contínuas (0% a 100%) aderentes à realidade empírica.
-* **Interpretabilidade SHAP:** A decomposição por Shapley Additive exPlanations comprovou um efeito sinérgico agravante quando a privação de sono se associa a índices elevados de estresse e déficits de simetria bilateral.
+* **Fatores Associados na Base:** A **Assimetria Muscular Contralateral ($r = +0.374$, 17.9% Gini)** e o **Histórico de Lesões ($r = +0.307$)** apresentaram associação positiva com o alvo. **Tempo de Aquecimento ($r = -0.273$)** e **Horas de Sono ($r = -0.270$)** apresentaram associação inversa. A classificação agregada abaixo atualiza a interpretação desses resultados com a coorte de Shalaj e as limitações do benchmark.
+* **Performance Probabilística:** O modelo calibrado atingiu **$\text{ROC-AUC} = 0.9021$**, **$\text{PR-AUC} = 0.8238$** e **$\text{Brier Score} = 0.1149$**, no estudo de benchmark, sem validação de probabilidades clínicas fora dessa base.
+* **Interpretabilidade SHAP:** A decomposição por Shapley Additive exPlanations descreveu padrões do modelo quando a privação de sono se associa a índices elevados de estresse e déficits de simetria bilateral.
 
 ---
 
@@ -73,7 +79,7 @@ Investigação empírica das interações entre variáveis comportamentais de ro
 * **Notebook Principal:** [`📓 soccermon/soccermon_pipeline.ipynb`](soccermon/soccermon_pipeline.ipynb)
 
 #### 🎯 Resumo da Investigação
-Investigação longitudinal do cruzamento multivariado entre variáveis cinemáticas de carga externa de movimento (GPS/IMU: desacelerações severas, sprints, ACWR) e parâmetros diários de rotina e bem-estar (duração e qualidade do sono, estresse, fadiga) na predição de risco de lesão de isquiotibiais em janela de 7 dias subsequentes ($[t+1, t+7]$).
+Investigação longitudinal do cruzamento entre carga, rotina e bem-estar (sono, estresse e fadiga), com alvo de registro de lesão de **coxa** nos sete dias seguintes. As colunas cinemáticas do notebook são derivadas de duração e sRPE; os arquivos GPS locais não são lidos nesse pipeline. O rótulo anatômico não distingue especificamente os isquiotibiais.
 
 #### 📊 Diagnóstico Crítico de Viabilidade
 * **Inviabilidade para Predição Direta de Lesão:** O estudo revelou que o SoccerMon **não é recomendado para predição direta de lesão em grade calendária**, devido à atrição na notificação médica no 2º ano (apenas 4 lesões no período de teste) e prevalência de apenas **0,26%**, gerando **91% a 97% de alarmes falsos** ($\text{PR-AUC} = 0.0514$).
@@ -91,140 +97,225 @@ Investigação longitudinal do cruzamento multivariado entre variáveis cinemát
 Investigação longitudinal do cruzamento multivariado entre métricas de carga de treinamento (razão ACWR $ATL_7 / CTL_{28}$, intensidade subjetiva RPE, fadiga sistêmica) e parâmetros de recuperação e rotina via sensores vestíveis (qualidade do sono, escore de recuperação autonômica / HRV proxy) em 156 atletas monitorados ao longo de 6 meses (15.420 sessões).
 
 #### 📊 Principais Conclusões e Métricas
-* **Fatores Críticos:** O **Escore de Recuperação Autonômica / HRV Proxy ($\rho = -0.323$, >18% Gini)** e a **Qualidade do Sono ($\rho = -0.278$)** são os maiores fatores protetores. Por outro lado, o **Índice de Fadiga ($\rho = +0.334$)**, a **Carga Total ($\rho = +0.228$)** e picos de **ACWR ($\rho = +0.142$)** representam os principais impulsionadores de risco.
+* **Fatores Associados na Base:** O **Escore de Recuperação Autonômica / HRV Proxy ($\rho = -0.323$, >18% Gini)** e a **Qualidade do Sono ($\rho = -0.278$)** apresentam associação inversa com o alvo. Por outro lado, o **Índice de Fadiga ($\rho = +0.334$)**, a **Carga Total ($\rho = +0.228$)** e picos de **ACWR ($\rho = +0.142$)** apresentam associação positiva com o alvo.
 * **Performance Probabilística:** O modelo calibrado com Platt Scaling atingiu **$\text{ROC-AUC} = 0.8806$**, **$\text{PR-AUC} = 0.5494$** (3,66x a prevalência base de 15,01%), **$\text{Brier Score} = 0.0932$** e **$\text{Log Loss} = 0.3009$**.
-* **Interpretabilidade SHAP & Interação 2D:** A análise de contorno bidimensional comprovou que a sobrecarga mecânica aguda (ACWR $> 1.4$) é multiplicada não linearmente quando imposta sobre um organismo em colapso autonômico (recuperação $< 40$), elevando a probabilidade empírica de risco para além de 80% a 90%.
+* **Interpretabilidade SHAP & Interação 2D:** Os cenários produzidos pelo modelo mostram interação entre carga e recuperação na base analisada. Não demonstram causalidade nem validam limiares individuais de lesão. As janelas móveis do código são de 7/28 **sessões**, não necessariamente dias.
 
 ---
 
-## 🏆 Síntese Consolidada de Resultados: As Variáveis Mais Determinantes
+### 4. `shalaj` — Lesões de Isquiotibiais
 
-Ao cruzar os achados obtidos nos estudos que apresentaram solidez amostral e alto valor preditivo ([`sirp-600`](sirp-600/) e [`multimodal_injury`](multimodal_injury/)), foi possível identificar **quais variáveis biológicas, comportamentais e de carga exercem maior impacto real sobre a predição de lesão**, superando amplamente características antropométricas estáticas (como idade, peso ou gênero isolados).
+* **Pasta do Estudo:** [`📁 shalaj/`](shalaj/)
+* **Documentação Científica Dedicada:** [`📄 shalaj/README.md`](shalaj/README.md)
+* **Notebook Principal:** [`📓 shalaj/shalaj_pipeline.ipynb`](shalaj/shalaj_pipeline.ipynb)
+
+#### 🎯 Resumo da Investigação
+Cruzamento entre testes de pré-temporada, histórico de lesões e ocorrência de lesão de isquiotibiais ao longo da temporada 2013/2014. O suplemento público contém 143 atletas, com 40 positivos. Os 43 episódios relatados no artigo não correspondem a 43 atletas distintos.
+
+#### 📊 Principais Conclusões e Métricas
+* **Fatores Associados:** Idade (ρ = +0,474), falha no Nordic (ρ = +0,286), IMC (ρ = +0,250) e histórico anterior (ρ = +0,191) têm associação marginal positiva com a ocorrência de lesão.
+* **Contraste com SIRP-600:** A assimetria de torque a 60°/s calculada neste módulo tem ρ = −0,065. O resultado não reproduz a associação positiva do SIRP-600; protocolos e populações diferem.
+* **Desempenho Interno:** RF calibrada: **ROC-AUC = 0,8235**, **AP = 0,6266**, **Brier = 0,1512**, **Log loss = 0,4600**. Logística: ROC-AUC = 0,8053. Avaliação OOF em cinco folds, sem validação externa ou separação por clube.
+* **Alcance:** A base sustenta análise de ocorrência na temporada. Não contém as datas necessárias para avaliar lesão nos próximos sete dias.
+
+---
+
+### 5. `university_football` — Rotina e Condição Física
+
+* **Pasta do Estudo:** [`📁 university_football/`](university_football/)
+* **Documentação Científica Dedicada:** [`📄 university_football/README.md`](university_football/README.md)
+* **Notebook Principal:** [`📓 university_football/university_football_pipeline.ipynb`](university_football/university_football_pipeline.ipynb)
+
+#### 🎯 Resumo da Investigação
+Cruzamento de 18 atributos de rotina, treinamento, antropometria e condição física com o rótulo `Injury_Next_Season`. O CSV contém 800 registros, sem ausências e com 400 rótulos em cada classe.
+
+#### 📊 Principais Conclusões e Métricas
+* **Associações com o Rótulo:** Estresse (ρ = +0,540), sono (ρ = −0,516), equilíbrio (ρ = −0,499) e histórico (ρ = +0,381) apresentam os padrões de interesse para a comparação com os estudos anteriores.
+* **Desempenho Interno:** Logística: **ROC-AUC = 0,9900**, **AP = 0,9901**, **Brier = 0,0389**, **Log loss = 0,1298**. RF calibrada: ROC-AUC = 0,9845. Métricas OOF por linha, sem identidade de atleta auditável no arquivo.
+* **Limite de Interpretação:** As fontes descrevem o alvo de formas conflitantes, como lesão observada e como classificação de alto risco. Há 715 escores de estresse acima do máximo de 40 da PSS-10 descrita no artigo. A unidade da coluna de sprint também requer esclarecimento. A alta separabilidade do rótulo não resolve essas inconsistências.
+
+---
+
+### 6. `soccernet_gsr` — Movimento por Vídeo
+
+* **Pasta do Estudo:** [`📁 soccernet_gsr/`](soccernet_gsr/)
+* **Documentação Científica Dedicada:** [`📄 soccernet_gsr/README.md`](soccernet_gsr/README.md)
+* **Notebook Principal:** [`📓 soccernet_gsr/soccernet_gsr_pipeline.ipynb`](soccernet_gsr/soccernet_gsr_pipeline.ipynb)
+
+#### 🎯 Resumo da Investigação
+Associação entre frames, posições anotadas no campo e trajetórias locais de jogadores/goleiros, com derivação de velocidade e aceleração em segmentos observados. Foram analisados todos os arquivos de anotações encontrados em treino, validação e teste, versão 1.3; frames de imagem e challenge não integram esta análise.
+
+#### 📊 Principais Conclusões e Métricas
+* **Volume:** 164 clips, 123.000 frames, 9 jogos e 3.481 trajetórias locais; 3.454 trajetórias têm movimento utilizável.
+* **Cobertura:** Mediana de **70,3% dos frames por trajetória**. Há 1.736.361 anotações com coordenadas e 22.385 sem coordenadas no campo.
+* **Controle Cinemático:** Dos 1.625.340 pontos derivados após segmentação e retirada de bordas, 1.610.694 passam pelos controles definidos no estudo.
+* **Alcance:** Não há alvo de lesão ou fadiga. As posições são anotações de referência, não previsões de um rastreador executado nesta tarefa; não se reportam AUC clínica ou acurácia de rastreamento.
+
+---
+
+## 🏆 Síntese Consolidada de Resultados: Classificação das Variáveis
+
+A síntese mantém a comparação por domínio esportivo e incorpora os novos cruzamentos. **Os coeficientes descrevem associação com ocorrência de lesão ou com o rótulo de cada base; não medem gravidade, grau ou nível clínico da lesão.** A documentação sintética do SIRP-600 e do Multimodal, a incerteza do alvo University e os diferentes horizontes impedem converter os resultados em um ranking clínico universal.
+
+A classificação a seguir combina **origem da evidência, compatibilidade do desfecho e consistência do resultado**. Ela não estabelece pesos para o modelo teórico:
+
+| Classe | Significado na análise do Scout |
+| :--- | :--- |
+| **A — Associação observada em coorte específica** | Resultado marginal observado em Shalaj, com lesão de isquiotibiais acompanhada na temporada. Ainda limitado à amostra e sem validação externa. |
+| **B — Indício exploratório** | Associação em benchmark sintético ou com rótulo de construção incerta. Útil para formular hipóteses, sem confirmação clínica por este cruzamento. |
+| **C — Não confirmada ou dependente da medida** | Associação pequena, divergência entre estudos ou unidade a esclarecer. Não implica que o fator seja irrelevante em toda população. |
+| **D — Relação com lesão ainda não avaliada** | Há uma hipótese ou medidas de movimento, mas faltam desfechos correspondentes nos mesmos atletas. |
 
 > [!NOTE]
-> Conforme constatado no diagnóstico científico do repositório, o cruzamento do **SoccerMon** apresentou taxa extrema de falsos alarmes (91% a 97%) decorrente de subnotificação médica em séries temporais de dias vazios. Por essa razão, **os preditores abaixo refletem estritamente as bases com consistência estatística validada**, garantindo que as conclusões técnicas sejam fiéis aos dados reais.
+> `r` indica Pearson; `ρ`, Spearman. Valores positivos representam associação com maior frequência do alvo 1; negativos, com menor frequência. Medidas diferentes e coeficientes de bases distintas são apresentados lado a lado, sem média ou soma. Gini e SHAP descrevem o modelo em que foram calculados e não equivalem a correlação ou peso clínico.
 
 ---
 
-### 📊 Tabela Geral de Preditores de Maior Relevância
+### 📊 Tabela Geral de Variáveis e Evidências
 
-A tabela a seguir consolida as variáveis mais influentes encontradas no repositório, ranqueadas por relevância estatística, capacidade de discriminação e magnitude de efeito nos modelos de Machine Learning (Random Forest + Platt Scaling + TreeSHAP):
-
-| Variável / Fator de Monitoramento | Domínio Esportivo | Origem Primária | Associação Estatística (r ou ρ) | Importância nas Árvores (Gini) | Impacto Médio SHAP | Direção do Efeito no Risco |
-| :--- | :--- | :--- | :---: | :---: | :---: | :---: |
-| **1. Assimetria Muscular Contralateral** | Mecânica Funcional | `sirp-600` | r = +0.374 | **17.9%** (Top 1) | **> 0.12** (Top 1 absoluto) | 🔴 **Agravante Forte** (risco dispara com assimetria > 8%) |
-| **2. Escore de Recuperação Autonômica (HRV Proxy)** | Fisiologia / Wearables | `multimodal_injury` | ρ = -0.323 | **> 18.0%** (com média móvel 7d) | **> 0.07** (Top 1) | 🟢 **Protetor Crítico** (queda < 40 antecede lesão) |
-| **3. Índice de Fadiga Sistêmica Percebida** | Carga Interna / Bem-Estar | `multimodal_injury` | ρ = +0.334 | Top 2 do modelo | > 0.05 | 🔴 **Agravante Primário** (níveis > 70 disparam vulnerabilidade) |
-| **4. Histórico de Lesões Anteriores** | Clínico / Recidiva | `sirp-600` | r = +0.307 | Elevado ganho de pureza | > 0.06 | 🔴 **Agravante Estrutural** (histórico prévio multiplica risco) |
-| **5. Sono: Duração (Horas) e Qualidade Subjetiva** | Rotina / Regeneração | Consistente em ambos | r = -0.270 e ρ = -0.278 | **9.5%** em `sirp-600` | 0.06 a 0.07 | 🟢 **Protetor Fundamental** (sono < 6h eleva risco) |
-| **6. Tempo de Aquecimento Pré-Treino** | Rotina / Treinamento | `sirp-600` | r = -0.273 | **9.1%** | > 0.05 | 🟢 **Protetor Ativo** (< 10 min concentra 80% das lesões) |
-| **7. Razão de Carga Aguda:Crônica (ACWR)** | Carga Externa / Treino | `multimodal_injury` | ρ = +0.142 | Relevante em interação | Modulador sinérgico | ⚠️ **Agravante Não Linear** (perigoso quando ACWR > 1.4) |
-| **8. Tempo de Recuperação Cardíaca Pós-Esforço** | Fisiologia Cardiovascular | `sirp-600` | r = +0.222 | **9.7%** | > 0.06 | 🔴 **Agravante de Desgaste** (recuperação lenta reflete estresse) |
-| **9. Nível de Estresse Psicológico** | Psicofisiologia | `sirp-600` | r = +0.285 | **9.2%** | > 0.06 | 🔴 **Agravante Fisiológico** (elevação de tônus basal e cortisol) |
+| Variável / Fator de Monitoramento | Domínio Esportivo | Associação Estatística e Origem | Direção Observada | Classe / Leitura Atual |
+| :--- | :--- | :--- | :--- | :--- |
+| **Idade** | Característica individual | Shalaj: ρ = **+0,474**; University: ρ = +0,021; SIRP-600: r = −0,032 | Positiva em Shalaj; próxima de zero nas demais medidas citadas | **A** — Ganha relevância na coorte de isquiotibiais; não deve ser descartada com base no benchmark anterior. |
+| **Falha no Teste Nordic** | Função muscular | Shalaj: ρ = **+0,286** | Positiva com falha no teste | **A** — Frequência de lesão de 44,4% entre quem falhou e 18,0% entre quem passou; associação, sem efeito causal demonstrado. |
+| **Índice de Massa Corporal (IMC)** | Antropometria | Shalaj: ρ = **+0,250**; University: ρ = +0,036 | Positiva em Shalaj | **A** — Resultado marginal dependente da população; não define uma faixa clínica de IMC. |
+| **Histórico de Lesões Anteriores** | Clínico / Recidiva | Shalaj: ρ = **+0,191**; SIRP-600: r = +0,307; University: ρ = +0,381 | Positiva nas análises marginais | **A** — O coeficiente ajustado da logística de Shalaj é negativo; essa instabilidade não deve ser interpretada como proteção. |
+| **Sono: Duração e Qualidade** | Rotina / Recuperação | SIRP-600: r = **−0,270**; Multimodal: ρ = **−0,278**; University: ρ = **−0,516** | Inversa nas medidas citadas | **B** — Padrão recorrente em fontes de alcance limitado; horas de sono e qualidade não são a mesma medida. |
+| **Nível de Estresse** | Psicofisiologia | SIRP-600: r = **+0,285**; University: ρ = **+0,540** | Positiva | **B** — A inconsistência de escala na University impede interpretar seus valores como PSS-10 ou importar limiares. |
+| **Índice de Fadiga** | Carga interna / Bem-estar | Multimodal: ρ = **+0,334** | Positiva | **B** — Associação no demonstrador multimodal; sem confirmação nova em coorte com fadiga e lesão datadas. |
+| **Escore de Recuperação / HRV Proxy** | Recuperação | Multimodal: ρ = **−0,323** | Inversa | **B** — Escore proxy, não uma medida bruta de HRV validada nesta análise. |
+| **Tempo de Aquecimento / Adesão à Rotina** | Rotina / Treinamento | SIRP-600: r = **−0,273**; University: ρ = **−0,265** | Inversa | **B** — Duração em minutos e adesão binária têm definições distintas. |
+| **Carga Total de Treino** | Exposição à carga | Multimodal: ρ = **+0,228** | Positiva | **B** — Resultado na base sintética; não equivale a horas semanais de treino de outra coorte. |
+| **Razão de Carga Aguda:Crônica (ACWR)** | Exposição à carga | Multimodal: ρ = **+0,142** | Positiva, de pequena magnitude | **B** — Não estabelece limiares seguros ou perigosos; falta novo teste direto de carga × recuperação com desfecho clínico. |
+| **Tempo de Recuperação Cardíaca** | Fisiologia | SIRP-600: r = **+0,222** | Positiva | **B** — Medida distinta de escore de recuperação ou HRV; associação restrita ao benchmark. |
+| **Equilíbrio e Testes Funcionais** | Condição física | University: equilíbrio ρ = **−0,499**; força do joelho −0,462; flexibilidade −0,457; agilidade −0,401 | Inversa com o rótulo fornecido | **B** — Não confirma capacidade de prever lesões clinicamente observadas. |
+| **Tempo de Reação** | Condição física | University: ρ = **+0,482** | Positiva com o rótulo | **B** — Resultado depende da construção não esclarecida do alvo. |
+| **Qualidade da Nutrição** | Rotina | University: ρ = **−0,422** | Inversa com o rótulo | **B** — Indício exploratório, sem confirmação clínica independente nesta expansão. |
+| **Assimetria Muscular** | Mecânica funcional | SIRP-600: r = **+0,374**; Shalaj, torque a 60°/s: ρ = **−0,065** | Divergente entre as medidas | **C** — A liderança no benchmark não se transfere para a medida de Shalaj; não sustenta prioridade universal. |
+| **Torque Relativo Médio a 240°/s** | Função muscular | Shalaj: ρ = **−0,069** | Associação marginal próxima de zero | **C** — Esta definição não teve associação relevante no recorte; não representa todos os testes de força possíveis. |
+| **Horas de Treino por Semana** | Volume de treino | University: ρ = **+0,028** | Associação próxima de zero | **C** — Não confirma associação nesta tabela; não é intercambiável com carga mecânica ou ACWR. |
+| **Sprint da University** | Condição física | University: ρ = **−0,476** | Inversa com o rótulo | **C** — Nome da coluna e unidade precisam ser esclarecidos antes de interpretar o sentido fisiológico. |
+| **Velocidade, Aceleração e Desaceleração por Vídeo** | Movimento / Exposição mecânica | SoccerNet-GSR: sem alvo clínico | Não avaliada em relação à lesão | **D** — Há cinemática derivada de posições anotadas, sem associação demonstrada com lesão ou fadiga. |
+| **Interação Carga × Recuperação** | Exposição e estado do atleta | Cenários do modelo multimodal; sem nova coorte que reúna as medidas e o evento | Hipótese em investigação | **D** — Os novos cruzamentos não fornecem um teste clínico direto dessa interação. |
 
 ---
 
-### 🔬 Detalhamento Conceitual, Fisiológico e Impacto Estatístico das Variáveis
+### 🔬 Detalhamento Conceitual e Impacto Estatístico das Variáveis
 
-#### 1. Assimetria Muscular Contralateral (`muscle_imbalance_%`)
-* **O que é:** Percentual de discrepância mecânica de força isométrica/isocinética ou de secção muscular transversa entre o membro dominante e o contralateral (ex: quadríceps direito vs. esquerdo ou razão isquiotibiais/quadríceps).
-* **O quanto influencia:**
-  * Apresentou a maior correlação linear de todo o dataset SIRP-600 (**$r = +0.374$**).
-  * Liderou a importância de divisão das árvores com **$17.9\%$ de redução de impureza de Gini** e o impacto marginal SHAP com magnitude **$\text{mean } |\text{SHAP}| > 0.12$**.
-* **Significado Esportivo:** Diferenças bilaterais superiores a **$8\% - 10\%$** forçam transferências compensatórias de torque mecânico durante sprints, frenagens e saltos. O membro fraco atinge falha excêntrica prematura, enquanto o membro oposto sofre sobrecarga reativa nas estruturas tendíneas e articulares.
+#### 1. Assimetria Muscular Contralateral (`Muscle_Asymmetry` / `hamstring_asymmetry_60_pct`)
+* **O que é:** Diferença entre medidas dos membros; o significado depende do teste, velocidade e fórmula utilizados. Não equivale automaticamente à razão isquiotibiais/quadríceps.
+* **Resultado Anterior:** SIRP-600: r = +0,374, com 17,9% de importância de Gini no modelo documentado.
+* **Atualização:** A medida de torque a 60°/s de Shalaj apresentou ρ = −0,065. Isso reduz a sustentação de um destaque universal da assimetria, sem provar ausência de associação em outros protocolos. **Classe C.**
 
-#### 2. Escore de Recuperação Autonômica / HRV Proxy (`recovery_score` & `recovery_score_rolling7`)
-* **O que é:** Índice escalar contínuo (0 a 100) derivado de sensores vestíveis esportivos noturnos, que atua como proxy do tônus vagal e da modulação do Sistema Nervoso Autônomo (SNA), refletindo a prontidão tecidual para absorção de carga.
-* **O quanto influencia:**
-  * Maior correlação protetora isolada do estudo multimodal (**$\rho = -0.323$**).
-  * Somado à sua média móvel de 7 dias, responde por **mais de $18\%$ da importância total de Gini** do ensemble e gera o maior deslocamento absoluto de probabilidade (**$\text{mean } |\text{SHAP}| > 0.07$**).
-* **Significado Esportivo:** Valores colapsados ($< 40$) revelam que o organismo permanece sob predomínio simpático de estresse metabólico. Treinar em alta intensidade nesse estado esgota a capacidade de reparação de microdanos musculares, elevando drasticamente a probabilidade de falha tecidual.
+#### 2. Escore de Recuperação Autonômica / HRV Proxy (`recovery_score` e média móvel)
+* **O que é:** Escore de recuperação apresentado no módulo multimodal; sua interpretação como proxy não substitui uma medição direta de HRV.
+* **Resultado:** ρ = −0,323 com o alvo, com destaque nas importâncias internas do modelo anterior.
+* **Atualização:** Não houve uma nova coorte que reunisse recuperação e lesão datada para confirmar o achado. As médias móveis do código são por sessões. **Classe B.**
 
-#### 3. Sono: Duração Contínua e Qualidade Subjetiva (`sleep_hours` & `sleep_quality`)
-* **O que é:** Medição quantitativa de horas totais de descanso por noite associada à qualidade percebida (arquitetura do sono profundo / sono de ondas lentas).
-* **O quanto influencia:**
-  * Correlação protetora consistente em ambos os módulos (**$r = -0.270$** no SIRP-600; **$\rho = -0.278$** no Multimodal Injury).
-  * Distribuição KDE comprovou que atletas lesionados dormem significativamente menos (média de **$6.1\text{h}$ vs. $7.6\text{h}$** no SIRP-600; qualidade média de **$4.57$ vs. $6.03$** no Multimodal).
-  * No SHAP Beeswarm, a privação de sono ($< 6.0\text{h}$) desloca os valores de risco invariavelmente para a margem positiva ($\text{SHAP} > +0.25$).
-* **Significado Esportivo:** É durante o sono profundo que ocorrem os picos de secreção de hormônio do crescimento (GH), síntese proteica miofibrilar e depuração de metabólitos inflamatórios. A restrição crônica de sono reduz o tempo de reação neuromuscular e compromete a coordenação motora fina sob fadiga.
+#### 3. Sono: Duração e Qualidade (`Sleep_Hours`, `sleep_quality`, `Sleep_Hours_Per_Night`)
+* **O que é:** Horas de sono e qualidade subjetiva são dimensões relacionadas, com unidades distintas.
+* **Resultado:** Associação inversa no SIRP-600 (r = −0,270), no Multimodal (ρ = −0,278) e no rótulo University (ρ = −0,516).
+* **Atualização:** A repetição do padrão mantém sono como variável candidata, mas a incerteza das fontes não permite declarar proteção causal ou um limite universal de horas. **Classe B.**
 
-#### 4. Índice de Fadiga Sistêmica Percebida (`fatigue_index`)
-* **O que é:** Grau de esgotamento psicofisiológico relatado pelo atleta em escala contínua (0 a 100), sensível ao estresse acumulado das sessões de treino e calendários de viagens.
-* **O quanto influencia:**
-  * Apresentou a maior correlação de risco positivo no estudo multimodal (**$\rho = +0.334$**).
-  * Médias de densidade KDE revelaram contraste evidente: **$76.47$** nos atletas que sofreram lesão contra **$56.92$** nos atletas saudáveis.
-* **Significado Esportivo:** A fadiga sistêmica atua como precursora da fadiga periférica local. Quando atinge níveis elevados ($> 70$), há inibição neural reflexa, alteração nos padrões de recrutamento motor e incapacidade de absorver cargas excêntricas de alta intensidade.
+#### 4. Índice de Fadiga Sistêmica (`fatigue_index`)
+* **O que é:** Escore de fadiga apresentado na tabela multimodal.
+* **Resultado:** ρ = +0,334 com o alvo dessa base.
+* **Atualização:** O SoccerNet-GSR acrescenta movimento, sem rótulo de fadiga. Ele não valida o escore nem sua relação com lesão. **Classe B.**
 
-#### 5. Histórico de Lesões Anteriores (`previous_injuries`)
-* **O que é:** Contagem cumulativa de eventos prévios de estiramentos, entorses ou rupturas musculares e ligamentares registradas na carreira do atleta.
-* **O quanto influencia:**
-  * Forte correlação linear com novas ocorrências (**$r = +0.307$**).
-  * O gráfico SHAP revelou que ter $2$ ou mais lesões prévias adiciona uma penalidade de risco basal permanente, agindo como multiplicador quando o atleta negligencia o sono ou o aquecimento.
-* **Significado Esportivo:** Tecidos biológicos cicatrizados substituem fibras contráteis organizadas por colágeno tipo III denso, caracterizado por menor elasticidade e menor capacidade de deformação sob tensão máxima. Cria-se um ponto de concentração de estresse mecânico na transição miotendínea, propenso à recidiva.
+#### 5. Histórico de Lesões (`Injury_History`, `previous_hamstring_injury`, `Previous_Injury_Count`)
+* **O que é:** Contagem de lesões anteriores em algumas bases e presença/ausência de lesão anterior de isquiotibiais em Shalaj.
+* **Resultado:** Associação marginal positiva em SIRP-600 (+0,307), Shalaj (+0,191) e University (+0,381), respeitando o tipo de coeficiente e definição de cada medida.
+* **Atualização:** Em Shalaj, 17/41 atletas com histórico e 23/102 sem histórico tiveram lesão. O sinal ajustado negativo na logística não deve ser convertido em efeito protetor. **Classe A para a associação marginal da coorte.**
 
-#### 6. Razão de Carga Aguda:Crônica (ACWR — *Acute:Chronic Workload Ratio*)
-* **O que é:** Relação matemática entre a carga de treino dos últimos 7 dias ($ATL_7$ — fadiga recente) e a média móvel dos últimos 28 dias ($CTL_{28}$ — capacidade crônica/condicionamento), baseada na modelagem de Tim Gabbett (2016):
-  $$\text{ACWR} = \frac{ATL_7}{CTL_{28} + 10^{-6}}$$
-* **O quanto influencia:**
-  * Correlação monotônica de **$\rho = +0.142$**.
-  * Embora com coeficiente bivariado moderado, possui **o mais forte efeito multiplicador não linear** quando cruzada com o estado fisiológico do atleta.
-* **Significado Esportivo:** Cargas no intervalo de $0.8$ a $1.2$ representam o *"sweet spot"* de adaptação atlética segura. Picos repentinos com $\text{ACWR} > 1.4$ dobram ou triplicam a probabilidade empírica de sobrecarga quando o atleta não possui lastro crônico suficiente para absorver a nova demanda.
+#### 6. Razão de Carga Aguda:Crônica (ACWR)
+* **O que é:** Relação entre médias recentes e mais longas da mesma medida de carga. No Multimodal, janelas de 7/28 sessões; no SoccerMon, de 7/28 dias.
+* **Resultado:** ρ = +0,142 no Multimodal. Os cenários de interação pertencem ao modelo dessa base.
+* **Atualização:** Os novos cruzamentos não fornecem uma coorte com carga, recuperação e lesão datada para testar diretamente a interação. Não há novo fundamento para faixas clínicas de ACWR. **Classe B; interação com recuperação em classe D.**
 
-#### 7. Tempo de Aquecimento Pré-Sessão (`warmup_time_min`)
-* **O que é:** Minutos dedicados a protocolos de mobilidade articular, ativação neuromuscular, corrida progressiva e exercícios dinâmicos antes de esforços em intensidade máxima.
-* **O quanto influencia:**
-  * Correlação protetora expressiva de **$r = -0.273$** e **$9.1\%$ de importância de Gini**.
-  * A distribuição KDE evidenciou que os lesionados apresentaram média de apenas **$9.4\text{ minutos}$**, enquanto atletas saudáveis dedicaram em média **$17.6\text{ minutos}$**.
-* **Significado Esportivo:** O aquecimento estruturado eleva a temperatura intramuscular (reduzindo a viscosidade viscoelástica das miofibrilas), otimiza a condução de potenciais de ação neuromuscular e melhora a complacência de tendões e ligamentos. Sessões com menos de $10\text{ minutos}$ deixam as estruturas vulneráveis a tensões de cisalhamento.
+#### 7. Aquecimento (`Warmup_Time` / `Warmup_Routine_Adherence`)
+* **O que é:** Duração do aquecimento no SIRP-600 e adesão binária à rotina na University.
+* **Resultado:** Associação inversa: r = −0,273 e ρ = −0,265, respectivamente.
+* **Atualização:** O novo cruzamento repete o sentido com o rótulo, sem validar equivalência entre medidas ou um número mínimo de minutos. **Classe B.**
+
+#### 8. Idade (`age` / `Age`)
+* **O que é:** Idade em anos no momento da avaliação inicial.
+* **Resultado:** Em Shalaj, ρ = +0,474; médias de 26,1 anos entre lesionados e 22,1 entre não lesionados.
+* **Atualização:** A associação próxima de zero em benchmarks anteriores não justifica descartar idade em uma população específica. **Classe A na coorte de Shalaj.**
+
+#### 9. Teste Nordic (`nordic_failed`)
+* **O que é:** Indicador de falha no teste conforme os códigos e protocolo do suplemento de Shalaj.
+* **Resultado:** ρ = +0,286; 24/54 atletas que falharam tiveram lesão (44,4%), contra 16/89 entre os que passaram (18,0%).
+* **Atualização:** Acrescenta um indicador funcional associado a um evento específico de isquiotibiais. A diferença observada não é uma probabilidade individual validada. **Classe A.**
+
+#### 10. Índice de Massa Corporal (`bmi` / `BMI`)
+* **O que é:** Relação entre massa corporal e estatura ao quadrado.
+* **Resultado:** ρ = +0,250 em Shalaj; associação próxima de zero na University (+0,036).
+* **Atualização:** A relevância depende da população e do desfecho; a associação marginal não identifica mecanismo causal ou faixa de risco. **Classe A em Shalaj.**
 
 ---
 
 ### 🔄 A Dinâmica Não Linear: O Desacoplamento entre Demanda e Recuperação
 
-Um dos achados analíticos mais expressivos consolidados no repositório é que **a lesão esportiva não é explicada por nenhuma variável de forma isolada**, mas sim pelo **desacoplamento entre a carga mecânica imposta e a capacidade biológica de regeneração**.
+O projeto mantém a hipótese de que **o significado da carga pode depender da recuperação e da vulnerabilidade do atleta**. A [superfície de interação do módulo Multimodal](multimodal_injury/figures/interacao_sono_acwr.png) mostra cenários calculados por aquele modelo, sem demonstrar que as probabilidades sejam transferíveis a atletas reais de outra coorte.
 
-A figura abaixo, extraída da análise de contorno bidimensional do módulo [`multimodal_injury`](multimodal_injury/figures/interacao_sono_acwr.png), sintetiza matematicamente essa interação:
+| Estado de Recuperação | Carga Estável | Aumento de Carga |
+| :--- | :--- | :--- |
+| **Recuperação adequada** | Cenário conceitual de equilíbrio entre demanda e recuperação. | Investigar a resposta individual à exposição adicional. |
+| **Recuperação reduzida** | Investigar déficit de recuperação mesmo sem pico de carga. | Combinação de interesse para testar a hipótese de interação. |
 
-```
-                            MATRIZ CONCEITUAL DE INTERAÇÃO 2D
-               
-   Escore de Recuperação / Sono
-             ▲
-        Alta │  🟢 RISCO BAIXO (< 15%)            🟡 RISCO MODERADO (25% - 40%)
-       (>75) │  Organismo adaptado absorve picos  Estresse controlado pelo lastro fisiológico
-             │
-             │
-       Média │  🟡 RISCO MODERADO                 🟠 RISCO ELEVADO (50% - 65%)
-     (50-70) │  Vigilância recomendada            Necessidade de modulação de volume
-             │
-             │
-       Baixa │  🟠 RISCO ELEVADO                  🔴 ZONA CRÍTICA DE RUPTURA (> 80% - 90%)
-       (<40) │  Fadiga prévia sem sobrecarga      Desacoplamento: pico de carga aguda imposto
-             │                                    a um tecido em colapso autonômico
-             └────────────────────────────────────────────────────────────────────────►
-                   Carga Estável (ACWR 0.8 - 1.2)           Pico Agudo (ACWR > 1.4 - 1.6)
-```
+Os novos cruzamentos acrescentam evidência de vulnerabilidade em Shalaj e descrição de movimento no SoccerNet-GSR, mas **não reúnem carga, recuperação e lesão datada nos mesmos atletas para testar diretamente essa interação**. Por isso, a matriz permanece qualitativa, sem percentuais ou condutas clínicas.
 
-* **Cenário 1 (Tolerância Fisiológica):** Quando o atleta apresenta recuperação autonômica robusta ($\text{Escore} > 75$) e sono consistente, mesmo uma elevação aguda de carga ($\text{ACWR} = 1.35$) mantém o risco de lesão contido na faixa segura ($< 15\%$).
-* **Cenário 2 (Multiplicação de Risco):** Em contraste, quando o atleta apresenta déficit autonômico ou privação de sono ($\text{Escore} < 40$) e é submetido ao mesmo pico agudo ($\text{ACWR} > 1.40$), **a probabilidade de lesão salta de forma não linear para a faixa de $80\% \text{ a } 90\%$**, demonstrando que o colapso estrutural ocorre pela combinação de sobrecarga e esgotamento.
+O [modelo teórico de risco de lesão](modelo-teorico-risco-lesao/README.md) preserva o recorte de nova lesão de isquiotibiais nos sete dias após uma avaliação anterior à sessão. Nenhuma nova base, no formato analisado, valida integralmente esse recorte.
 
 ---
 
 ## 🔬 Comparativo Intermódulos e Lições sobre Viabilidade Amostral
 
-A tabela abaixo sintetiza os resultados de machine learning alcançados nos três cruzamentos do repositório, evidenciando as diferenças metodológicas entre cenários estáticos, séries temporais longas com subnotificação clínica e séries multimodais contínuas:
+### Estudos Anteriores
+
+Os valores a seguir são os resultados documentados nos módulos anteriores; esses modelos não foram retreinados na expansão. Para SoccerMon, foram usados os números da seção de resultados do próprio módulo, atualizando a tabela agregada anterior.
 
 | Dimensão Metodológica | Módulo [`sirp-600`](sirp-600/) | Módulo [`soccermon`](soccermon/) | Módulo [`multimodal_injury`](multimodal_injury/) |
 | :--- | :---: | :---: | :---: |
-| **Natureza dos Dados** | Tabular Estático Transversal | Série Temporal Diária de Futebol Feminino | Série Temporal Longitudinal Multimodal |
-| **Volume Amostral** | 600 atletas individuais | 50 atletas (36.550 dias calendário) | 156 atletas (15.420 sessões de treino) |
-| **Taxa de Prevalência Positiva** | 31,5% (Balanceado) | 0,26% no teste (Desbalanceamento extremo) | **15,01% (Equilibrado e representativo)** |
-| **Subnotificação / Atrição Clínica** | Inexistente (Base estática benchmark) | Severa (Clube abandonou anotações em 2021) | Inexistente (6 meses ininterruptos) |
-| **ROC-AUC Score** | **`0.9021`** | **`0.8410`** | **`0.8806`** |
-| **PR-AUC (Average Precision)** | **`0.8238`** | **`0.0349`** (Diluído em dias vazios) | **`0.5494`** (3,66x a taxa aleatória) |
-| **Brier Score (Calibrado)** | **`0.1149`** | **`0.0030`** | **`0.0932`** |
-| **Log Loss** | **`0.3578`** | **`0.0191`** | **`0.3009`** |
-| **Conclusão Metodológica** | **Excelente para fatores estruturais:** Assimetria muscular, sono e aquecimento explicam risco individual. | **Inadequado para lesão diária:** Recomendado pivotamento do corpus para Prontidão (*Readiness*) e Fadiga. | **Excelente para interação carga-recuperação:** Comprova a dinâmica entre ACWR e déficit fisiológico. |
+| **Natureza dos Dados** | Tabela estática; natureza sintética declarada | Série diária de futebol feminino | Tabela longitudinal; natureza sintética declarada |
+| **Volume Amostral** | 600 atletas | 50 atletas; 36.550 atleta-dias | 156 atletas; 15.420 sessões |
+| **Alvo** | Rótulo estático de risco | Registro de lesão de coxa nos próximos 7 dias | `injury_occurred == 2` na sessão |
+| **Validação** | Divisão estratificada 80/20 | Corte temporal em 01/06/2021 | Divisão aleatória estratificada 80/20 de sessões |
+| **Prevalência Positiva no Teste** | 31,7% | 0,26% | 15,01% |
+| **ROC-AUC** | **0,9021** | **0,8411** | **0,8806** |
+| **Average Precision (AP)** | **0,8238** | **0,0514** | **0,5494** |
+| **Brier Score** | **0,1149** | **0,0027** | **0,0932** |
+| **Log Loss** | **0,3578** | **0,0177** | **0,3009** |
+| **Leitura Atual** | Exploração de fatores e modelo em benchmark | AP baixa e desfechos escassos; Brier baixo deve ser lido junto à prevalência | Exploração de carga e recuperação; sem validação prospectiva por essa divisão |
+
+### Novos Cruzamentos Tabulares
+
+A avaliação dos novos módulos usa cinco folds externos. Cada atleta de Shalaj ou linha da University recebe uma previsão OOF, de modelo sem treino naquela observação. A RF é calibrada em três folds internos. A referência de prevalência usa somente o treino de cada fold.
+
+| Dataset | Modelo | ROC-AUC OOF | AP | Brier | Log Loss |
+| :--- | :--- | ---: | ---: | ---: | ---: |
+| **Shalaj** | Referência de prevalência | 0,4942 | 0,2774 | 0,2015 | 0,5927 |
+| **Shalaj** | Regressão logística | 0,8053 | 0,5442 | 0,1617 | 0,4855 |
+| **Shalaj** | RF calibrada | **0,8235** | **0,6266** | **0,1512** | **0,4600** |
+| **University** | Referência de prevalência | 0,5000 | 0,5000 | 0,2500 | 0,6931 |
+| **University** | Regressão logística | **0,9900** | **0,9901** | **0,0389** | **0,1298** |
+| **University** | RF calibrada | 0,9845 | 0,9843 | 0,0473 | 0,1634 |
+
+* **Shalaj:** 143 atletas, 40 positivos (27,97%). O intervalo bootstrap de 95% da AUC da RF é **0,754–0,890**, condicional às previsões OOF; não inclui toda a incerteza do treino nem corrige a dependência por clube. A amostra não oferece identificadores de clube para esse teste.
+* **University:** 800 linhas e 400 positivos (50%). O intervalo condicional da AUC logística é **0,985–0,994**. A semântica clínica do alvo permanece incerta; a classificação da tabela não confirma previsão de lesões reais.
+* **Comparabilidade dos Modelos:** Os estudos anteriores usam RF de 500 árvores; os novos usam RF de 200 árvores, com outras configurações de profundidade/folhas e avaliação. A logística foi uma comparação adicional. Não se trata de um experimento que varia apenas o dataset.
+* **Leitura das Métricas:** ROC-AUC e AP aumentam com melhor discriminação; Brier e Log loss diminuem com melhor qualidade probabilística no alvo. AP é Average Precision, chamada de PR-AUC nos estudos anteriores, e não precisão de um limiar. Um Brier baixo não comprova calibração ou utilidade clínica isoladamente.
+
+### SoccerNet-GSR: Cinemática sem Avaliação Preditiva de Lesão
+
+| Dimensão | SoccerNet-GSR |
+| :--- | :--- |
+| **Material Inspecionado** | Anotações v1.3 de 164 clips |
+| **Unidade** | Trajetória local por clip |
+| **Volume Processado** | 123.000 frames; 3.481 trajetórias, 3.454 com movimento utilizável |
+| **Cobertura / Qualidade** | Cobertura mediana de 70,3%; 1.610.694 pontos cinemáticos aceitos de 1.625.340 derivados |
+| **Resultado Disponível** | Cinemática descritiva de posições anotadas |
+| **ROC-AUC / AP / Brier / Log Loss** | Não se aplicam à análise executada, sem alvo de lesão/fadiga |
+| **Limite** | Sem rastreador automático executado ou referência GPS de validação |
 
 ---
 
@@ -232,7 +323,10 @@ A tabela abaixo sintetiza os resultados de machine learning alcançados nos trê
 
 > [!WARNING]
 > ### 📌 Nota sobre Uso dos Modelos e Interpretação Estatística
-> 
-> * **Natureza Exploratória e Analítica:** Todos os estudos e cruzamentos presentes no repositório Scout têm como objetivo a investigação de padrões estatísticos, formulação de hipóteses e demonstração técnica de métodos modernos de Ciência de Dados e Machine Learning aplicados ao esporte.
-> * **Correlação $\neq$ Causalidade:** Associações estatísticas identificadas (como correlações monotônicas de Spearman, importâncias em árvores de decisão e valores SHAP) não comprovam relação de causa e efeito direta. Fatores de confusão (*confounders*) e interações multivariadas não mensuradas devem ser considerados.
-> * **Não Aplicabilidade Clínica Direta:** Os modelos e estimativas probabilísticas disponibilizados **não devem ser empregados como sistemas autônomos de diagnóstico ou prescrição médica/fisioterápica sem validação clínica prospectiva** conduzida por profissionais de saúde e comissões multidisciplinares devidamente habilitadas.
+>
+> * **Natureza Exploratória e Analítica:** Os estudos investigam padrões estatísticos e hipóteses. O SIRP-600 e o Multimodal têm natureza sintética declarada; a origem e construção do rótulo University permanecem conflitantes nas fontes.
+> * **Correlação ≠ Causalidade:** Correlações, importâncias de árvores e SHAP não demonstram causa, não são pesos universais e não permitem comparar diretamente protocolos distintos. A classificação das variáveis se refere às evidências deste projeto, sem medir gravidade de lesão.
+> * **Limites Temporais:** Dias, sessões, avaliações de pré-temporada e clips de 30 segundos não são unidades intercambiáveis. Coxa, isquiotibiais, lesão genérica e alto risco não são o mesmo evento.
+> * **Qualidade dos Estudos Anteriores:** No SoccerMon, o preenchimento com observações posteriores pode trazer informação futura e as métricas cinemáticas são derivadas de duração/sRPE. No Multimodal, o pré-processamento anterior à divisão e o teste aleatório por sessões limitam a interpretação prospectiva. Os gráficos de interação são cenários dos modelos; o SHAP usa árvores separadas da composição calibrada final.
+> * **Ausência de Integração de Participantes entre Bases:** Os cruzamentos acontecem dentro de cada fonte. A síntese compara achados; não junta sono de uma coorte com lesões ou trajetórias de outra como se fossem do mesmo atleta.
+> * **Não Aplicabilidade Clínica Direta:** Nenhum dos resultados desta expansão valida uma ferramenta individual para nova lesão de isquiotibiais em sete dias. Uso clínico requer avaliação prospectiva e externa compatível com o evento e o instante de avaliação.
