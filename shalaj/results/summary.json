@@ -1,0 +1,143 @@
+{
+  "dataset": "Shalaj 2020",
+  "analysis_date": "2026-11-12",
+  "source_url": "https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0241127.s001",
+  "article": "https://doi.org/10.1371/journal.pone.0241127",
+  "sha256": "b71f6e48a6c0f941a304c616dda57d2c93d003980f8bedb37b0b453087ac974f",
+  "raw_shape": [
+    143,
+    49
+  ],
+  "unique_players": 143,
+  "missing_cells": 1,
+  "target_mapping": {
+    "1=yes": 1,
+    "2=no": 0
+  },
+  "positive_players": 40,
+  "prevalence": 0.27972027972027974,
+  "features": [
+    "age",
+    "bmi",
+    "previous_hamstring_injury",
+    "nordic_failed",
+    "hamstring_relative_240_mean",
+    "hamstring_asymmetry_60_pct"
+  ],
+  "validation": "5-fold stratified OOF; RF sigmoid calibration internal cv=3",
+  "clinical_7d_eligible": false,
+  "metrics_oof": {
+    "prevalencia": {
+      "roc_auc": 0.49417475728155347,
+      "average_precision": 0.2774053532674222,
+      "brier": 0.20148972396342393,
+      "log_loss": 0.5927209174626725,
+      "auc_bootstrap_95_conditional": [
+        0.40221246117472537,
+        0.5818842742892342
+      ]
+    },
+    "logistica": {
+      "roc_auc": 0.8053398058252427,
+      "average_precision": 0.5442430727131664,
+      "brier": 0.1617213510340464,
+      "log_loss": 0.48550716347902034,
+      "auc_bootstrap_95_conditional": [
+        0.727024134963507,
+        0.87594708938979
+      ]
+    },
+    "rf_sigmoid": {
+      "roc_auc": 0.8235436893203884,
+      "average_precision": 0.626601775009531,
+      "brier": 0.1511697757391882,
+      "log_loss": 0.46003964763690824,
+      "auc_bootstrap_95_conditional": [
+        0.7539766251582946,
+        0.8896487603305784
+      ]
+    }
+  },
+  "associations": [
+    {
+      "feature": "age",
+      "spearman": 0.47353337074237734,
+      "p_exploratory": 2.3296386885889788e-09,
+      "mean_no_injury": 22.145631067961165,
+      "mean_injury": 26.05
+    },
+    {
+      "feature": "bmi",
+      "spearman": 0.24985135869832883,
+      "p_exploratory": 0.0026172559954428225,
+      "mean_no_injury": 22.626019417475728,
+      "mean_injury": 23.62925
+    },
+    {
+      "feature": "previous_hamstring_injury",
+      "spearman": 0.19056180651292762,
+      "p_exploratory": 0.022624305999080573,
+      "mean_no_injury": 0.23300970873786409,
+      "mean_injury": 0.425,
+      "odds_ratio": 2.4329710144927534,
+      "fisher_p": 0.03815797156360847,
+      "table": [
+        [
+          79,
+          23
+        ],
+        [
+          24,
+          17
+        ]
+      ]
+    },
+    {
+      "feature": "nordic_failed",
+      "spearman": 0.2858555443581289,
+      "p_exploratory": 0.0005384956789325407,
+      "mean_no_injury": 0.2912621359223301,
+      "mean_injury": 0.6,
+      "odds_ratio": 3.65,
+      "fisher_p": 0.000982546996215381,
+      "table": [
+        [
+          73,
+          16
+        ],
+        [
+          30,
+          24
+        ]
+      ]
+    },
+    {
+      "feature": "hamstring_relative_240_mean",
+      "spearman": -0.06868912509875622,
+      "p_exploratory": 0.4149826136498625,
+      "mean_no_injury": 1.357378505259574,
+      "mean_injury": 1.332146614066062
+    },
+    {
+      "feature": "hamstring_asymmetry_60_pct",
+      "spearman": -0.06453771699838257,
+      "p_exploratory": 0.4438047051460302,
+      "mean_no_injury": 9.872560589034297,
+      "mean_injury": 8.163788164778577
+    }
+  ],
+  "excluded_post_baseline": [
+    "Time_exposure_hours_Training",
+    "Time_exposure_hours_Match",
+    "Time_exposure_hours_Training_and_Match",
+    "Injury_Rate_training",
+    "Injury_Rate_match",
+    "Injury_Rate_TOTAL"
+  ],
+  "limitations": [
+    "No event dates or daily repeated measurements in released supplement",
+    "No club identifiers: validation cannot hold out clubs",
+    "Conditional bootstrap intervals; no external validation",
+    "Article reports 43 episodes; released binary target identifies 40 players"
+  ]
+}

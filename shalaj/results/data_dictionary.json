@@ -1,0 +1,365 @@
+[
+  {
+    "column": "player_id",
+    "label": "player id",
+    "codes": {},
+    "missing": 0,
+    "unique": 143
+  },
+  {
+    "column": "age",
+    "label": "age (yrs)",
+    "codes": {},
+    "missing": 0,
+    "unique": 17
+  },
+  {
+    "column": "body_mass",
+    "label": "mass (kg)",
+    "codes": {},
+    "missing": 0,
+    "unique": 111
+  },
+  {
+    "column": "bmi",
+    "label": "kg/m2",
+    "codes": {},
+    "missing": 0,
+    "unique": 129
+  },
+  {
+    "column": "body_height",
+    "label": "height (cm)",
+    "codes": {},
+    "missing": 0,
+    "unique": 99
+  },
+  {
+    "column": "dominant_leg",
+    "label": "dominant leg",
+    "codes": {
+      "1.0": "right",
+      "2.0": "left"
+    },
+    "missing": 0,
+    "unique": 2
+  },
+  {
+    "column": "play_position",
+    "label": "playing position",
+    "codes": {
+      "1.0": "keeper",
+      "2.0": "int defender",
+      "3.0": "ext defender",
+      "4.0": "cent midfielder",
+      "5.0": "ext midfielder",
+      "6.0": "winger",
+      "7.0": "striker"
+    },
+    "missing": 0,
+    "unique": 7
+  },
+  {
+    "column": "sit_reach",
+    "label": "sit & reach (cm)",
+    "codes": {},
+    "missing": 0,
+    "unique": 34
+  },
+  {
+    "column": "nordic_hamstring_test",
+    "label": "nordic hamstring test",
+    "codes": {
+      "1.0": "yes",
+      "2.0": "no"
+    },
+    "missing": 0,
+    "unique": 2
+  },
+  {
+    "column": "hamstrings_concentric_60_dom",
+    "label": "hamstring strength (conc, 60 deg/s) dominant (Nm)",
+    "codes": {},
+    "missing": 0,
+    "unique": 131
+  },
+  {
+    "column": "hamstrings_concentric_60_nondom",
+    "label": "hamstring strength (conc, 60 deg/s) non-dominant (Nm)",
+    "codes": {},
+    "missing": 0,
+    "unique": 126
+  },
+  {
+    "column": "quadriceps_concentric_60_dom",
+    "label": "quads strength (conc, 60 deg/s) dominant (Nm)",
+    "codes": {},
+    "missing": 0,
+    "unique": 133
+  },
+  {
+    "column": "quadriceps_concentric_60_nondom",
+    "label": "quads strength (conc, 60 deg/s) non-dominant (Nm)",
+    "codes": {},
+    "missing": 0,
+    "unique": 132
+  },
+  {
+    "column": "hamstrings_quadriceps_ratio__60_dom",
+    "label": "H:QF ratio (60 deg/s) dom (%)",
+    "codes": {},
+    "missing": 0,
+    "unique": 143
+  },
+  {
+    "column": "hamstrings_quadriceps_ratio_60_nondom",
+    "label": "H:QF ratio (60 deg/s) nondom (%)",
+    "codes": {},
+    "missing": 0,
+    "unique": 143
+  },
+  {
+    "column": "hamstrings_concentric_240_dom",
+    "label": "hamstring strength (conc, 240 deg/s) dominant (Nm)",
+    "codes": {},
+    "missing": 0,
+    "unique": 125
+  },
+  {
+    "column": "hamsrings_concentric_240_nondom",
+    "label": "hamstring strength (conc, 240 deg/s) non-dominant (Nm)",
+    "codes": {},
+    "missing": 0,
+    "unique": 129
+  },
+  {
+    "column": "quadriceps_concentric_240_dom",
+    "label": "quads strength (conc, 240 deg/s) dominant (Nm)",
+    "codes": {},
+    "missing": 0,
+    "unique": 122
+  },
+  {
+    "column": "quadriceps_concentric_240_nondom",
+    "label": "quads strength (conc, 240 deg/s) non-dominant (Nm)",
+    "codes": {},
+    "missing": 0,
+    "unique": 125
+  },
+  {
+    "column": "hamstring_quadriceps_ratio_240_dom",
+    "label": "H:QF ratio (240 deg/s) dominant (%)",
+    "codes": {},
+    "missing": 0,
+    "unique": 143
+  },
+  {
+    "column": "hamstring_quadriceps_ratio_240_nondom",
+    "label": "H:QF ratio (240 deg/s) non-dominant (%)",
+    "codes": {},
+    "missing": 0,
+    "unique": 143
+  },
+  {
+    "column": "hamstring_eccentric_30_dom",
+    "label": "hamstring strength (ecc, 30 deg/s) dominant (Nm)",
+    "codes": {},
+    "missing": 0,
+    "unique": 137
+  },
+  {
+    "column": "hamstring_eccentric_30_nondom",
+    "label": "hamstring strength (ecc, 30 deg/s) non-dominant (Nm)",
+    "codes": {},
+    "missing": 0,
+    "unique": 133
+  },
+  {
+    "column": "hamstring_eccentric_120_dom",
+    "label": "hamstring strength (ecc, 120 deg/s) dominant (Nm)",
+    "codes": {},
+    "missing": 0,
+    "unique": 134
+  },
+  {
+    "column": "hamstring_eccentric_120_nondom",
+    "label": "hamstring strength (ecc, 120 deg/s) non-dominant (Nm)",
+    "codes": {},
+    "missing": 0,
+    "unique": 133
+  },
+  {
+    "column": "CMJ_height",
+    "label": "counter movement jump height (cm)",
+    "codes": {},
+    "missing": 0,
+    "unique": 26
+  },
+  {
+    "column": "Illinois_agility_test",
+    "label": "illinois agility test (s)",
+    "codes": {},
+    "missing": 0,
+    "unique": 104
+  },
+  {
+    "column": "dash_20m",
+    "label": "20 m dash (s)",
+    "codes": {},
+    "missing": 0,
+    "unique": 55
+  },
+  {
+    "column": "dash_40m",
+    "label": "40 m dash (s)",
+    "codes": {},
+    "missing": 0,
+    "unique": 76
+  },
+  {
+    "column": "previous_hamstring_injury",
+    "label": "previous hamstring strain injury",
+    "codes": {
+      "0.0": "no",
+      "1.0": "yes"
+    },
+    "missing": 0,
+    "unique": 2
+  },
+  {
+    "column": "total_hamstring_injuries",
+    "label": "Ne. of H injuries total 2013/2014",
+    "codes": {
+      "1.0": "yes",
+      "2.0": "no"
+    },
+    "missing": 0,
+    "unique": 2
+  },
+  {
+    "column": "Time_exposure_hours_Training",
+    "label": "Time of exposure in hours (Training)",
+    "codes": {},
+    "missing": 0,
+    "unique": 50
+  },
+  {
+    "column": "Time_exposure_hours_Match",
+    "label": "Time of exposure in hours (Match)",
+    "codes": {},
+    "missing": 0,
+    "unique": 138
+  },
+  {
+    "column": "Time_exposure_hours_Training_and_Match",
+    "label": "Time of exposure in hours (TOTAL)",
+    "codes": {},
+    "missing": 0,
+    "unique": 142
+  },
+  {
+    "column": "Injury_Rate_training",
+    "label": null,
+    "codes": {},
+    "missing": 0,
+    "unique": 57
+  },
+  {
+    "column": "Injury_Rate_match",
+    "label": null,
+    "codes": {},
+    "missing": 0,
+    "unique": 49
+  },
+  {
+    "column": "Injury_Rate_TOTAL",
+    "label": null,
+    "codes": {},
+    "missing": 0,
+    "unique": 80
+  },
+  {
+    "column": "Relative_Hamstring_torque_60_dom",
+    "label": null,
+    "codes": {},
+    "missing": 0,
+    "unique": 143
+  },
+  {
+    "column": "Relative_Hamstring_torque_60_nondom",
+    "label": null,
+    "codes": {},
+    "missing": 0,
+    "unique": 143
+  },
+  {
+    "column": "Relative_Quadriceps_torque_60_dom",
+    "label": null,
+    "codes": {},
+    "missing": 0,
+    "unique": 143
+  },
+  {
+    "column": "Relative_Quadriceps_torque_60_nondom",
+    "label": null,
+    "codes": {},
+    "missing": 0,
+    "unique": 143
+  },
+  {
+    "column": "Relative_Hamstring_torque_240_dom",
+    "label": null,
+    "codes": {},
+    "missing": 0,
+    "unique": 143
+  },
+  {
+    "column": "Relative_Hamstring_torque_240_nondom",
+    "label": null,
+    "codes": {},
+    "missing": 0,
+    "unique": 143
+  },
+  {
+    "column": "Relative_Quadriceps_torque_240_dom",
+    "label": null,
+    "codes": {},
+    "missing": 0,
+    "unique": 143
+  },
+  {
+    "column": "Relative_Quadriceps_torque_240_nondom",
+    "label": null,
+    "codes": {},
+    "missing": 1,
+    "unique": 142
+  },
+  {
+    "column": "Relative_Hamstring_torque_eccentric_30_dom",
+    "label": null,
+    "codes": {},
+    "missing": 0,
+    "unique": 143
+  },
+  {
+    "column": "Relative_Hamstring_torque_eccentric_30_nondom",
+    "label": null,
+    "codes": {},
+    "missing": 0,
+    "unique": 143
+  },
+  {
+    "column": "Relative_Hamstring_torque_eccentric_120_dom",
+    "label": null,
+    "codes": {},
+    "missing": 0,
+    "unique": 143
+  },
+  {
+    "column": "Relative_Hamstring_torque_eccentric_120_nondom",
+    "label": null,
+    "codes": {},
+    "missing": 0,
+    "unique": 143
+  }
+]
