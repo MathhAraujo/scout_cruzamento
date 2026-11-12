@@ -1,0 +1,59 @@
+{
+  "dataset": "SoccerNet/SN-GSR-2024",
+  "revision": "3cc710eb6d53a23350a3d2863311c1c0a2e645d7",
+  "analysis_date": "2026-11-12",
+  "source_scope": "All Labels-GameState.json in train, valid and test; no image frames or challenge split",
+  "annotation_versions": [
+    "1.3"
+  ],
+  "clips_by_split": {
+    "test": 49,
+    "train": 57,
+    "valid": 58
+  },
+  "clips": 164,
+  "frames": 123000,
+  "games_observed": 9,
+  "local_tracklets": 3481,
+  "tracklets_with_motion": 3454,
+  "player_annotations_with_coordinates": 1736361,
+  "missing_pitch_coordinates": 22385,
+  "outside_coordinate_margin": 0,
+  "motion_points_before_qc": 1625340,
+  "motion_points_after_qc": 1610694,
+  "median_frame_coverage": 0.7026666666666667,
+  "median_track_mean_speed_m_s": 2.2749872422255706,
+  "median_track_p95_speed_m_s": 4.7518425280664545,
+  "connected_observation_s_sum": 64134.0,
+  "kinematics": {
+    "coordinate_source": "annotated bbox_pitch bottom_middle, v1.3",
+    "join": "annotations.image_id -> images.image_id, many_to_one",
+    "identity_key": [
+      "split",
+      "clip",
+      "track_id"
+    ],
+    "window_frames": 11,
+    "polynomial_order": 2,
+    "trim_each_edge_frames": 10,
+    "segment_min_frames": 22,
+    "max_speed_qc_m_s": 12.0,
+    "max_abs_acceleration_qc_m_s2": 12.0,
+    "coordinate_margin_m": {
+      "abs_x_max": 60,
+      "abs_y_max": 45
+    }
+  },
+  "injury_target_available": false,
+  "fatigue_target_available": false,
+  "clinical_7d_eligible": false,
+  "tracking_model_run": false,
+  "limitations": [
+    "Annotated positions, not predictions from an automatic tracker or GPS",
+    "30-second clips do not establish within-match fatigue evolution",
+    "Track IDs and jersey/team do not establish cross-clip clinical identity",
+    "Filtering uses future neighbors and is descriptive offline only",
+    "No external kinematic reference to validate derived speed/acceleration",
+    "Image frames and challenge split not downloaded"
+  ]
+}
