@@ -1,0 +1,154 @@
+[
+  {
+    "column": "Age",
+    "dtype": "int64",
+    "missing": 0,
+    "unique": 7,
+    "minimum": 18.0,
+    "maximum": 24.0
+  },
+  {
+    "column": "Height_cm",
+    "dtype": "int64",
+    "missing": 0,
+    "unique": 42,
+    "minimum": 154.0,
+    "maximum": 200.0
+  },
+  {
+    "column": "Weight_kg",
+    "dtype": "int64",
+    "missing": 0,
+    "unique": 53,
+    "minimum": 45.0,
+    "maximum": 105.0
+  },
+  {
+    "column": "Position",
+    "dtype": "str",
+    "missing": 0,
+    "unique": 4,
+    "minimum": null,
+    "maximum": null
+  },
+  {
+    "column": "Training_Hours_Per_Week",
+    "dtype": "float64",
+    "missing": 0,
+    "unique": 781,
+    "minimum": 5.0,
+    "maximum": 18.86660842060413
+  },
+  {
+    "column": "Matches_Played_Past_Season",
+    "dtype": "int64",
+    "missing": 0,
+    "unique": 35,
+    "minimum": 5.0,
+    "maximum": 39.0
+  },
+  {
+    "column": "Previous_Injury_Count",
+    "dtype": "int64",
+    "missing": 0,
+    "unique": 9,
+    "minimum": 0.0,
+    "maximum": 8.0
+  },
+  {
+    "column": "Knee_Strength_Score",
+    "dtype": "float64",
+    "missing": 0,
+    "unique": 800,
+    "minimum": 52.39135132874444,
+    "maximum": 93.90005145645726
+  },
+  {
+    "column": "Hamstring_Flexibility",
+    "dtype": "float64",
+    "missing": 0,
+    "unique": 800,
+    "minimum": 58.18038076497268,
+    "maximum": 100.0
+  },
+  {
+    "column": "Reaction_Time_ms",
+    "dtype": "float64",
+    "missing": 0,
+    "unique": 800,
+    "minimum": 180.0,
+    "maximum": 306.7308510121636
+  },
+  {
+    "column": "Balance_Test_Score",
+    "dtype": "float64",
+    "missing": 0,
+    "unique": 794,
+    "minimum": 60.05948373150822,
+    "maximum": 100.0
+  },
+  {
+    "column": "Sprint_Speed_10m_s",
+    "dtype": "float64",
+    "missing": 0,
+    "unique": 800,
+    "minimum": 4.862435363380129,
+    "maximum": 6.898227865283558
+  },
+  {
+    "column": "Agility_Score",
+    "dtype": "float64",
+    "missing": 0,
+    "unique": 797,
+    "minimum": 50.0,
+    "maximum": 100.0
+  },
+  {
+    "column": "Sleep_Hours_Per_Night",
+    "dtype": "float64",
+    "missing": 0,
+    "unique": 800,
+    "minimum": 5.0,
+    "maximum": 9.860553385501984
+  },
+  {
+    "column": "Stress_Level_Score",
+    "dtype": "float64",
+    "missing": 0,
+    "unique": 800,
+    "minimum": 21.561185943923675,
+    "maximum": 87.06500717463089
+  },
+  {
+    "column": "Nutrition_Quality_Score",
+    "dtype": "float64",
+    "missing": 0,
+    "unique": 798,
+    "minimum": 50.0,
+    "maximum": 100.0
+  },
+  {
+    "column": "Warmup_Routine_Adherence",
+    "dtype": "int64",
+    "missing": 0,
+    "unique": 2,
+    "minimum": 0.0,
+    "maximum": 1.0
+  },
+  {
+    "column": "Injury_Next_Season",
+    "dtype": "int64",
+    "missing": 0,
+    "unique": 2,
+    "minimum": 0.0,
+    "maximum": 1.0
+  },
+  {
+    "column": "BMI",
+    "dtype": "float64",
+    "missing": 0,
+    "unique": 538,
+    "minimum": 14.346326424712313,
+    "maximum": 36.26243885984146
+  }
+]

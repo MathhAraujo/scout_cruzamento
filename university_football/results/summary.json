@@ -1,0 +1,173 @@
+{
+  "dataset": "yuanchunhong/university-football-injury-prediction-dataset",
+  "analysis_date": "2026-11-12",
+  "download_url": "https://www.kaggle.com/api/v1/datasets/download/yuanchunhong/university-football-injury-prediction-dataset",
+  "sha256_csv": "73b692b2a4df5f544383929a09f4502663fe34a5a5e40aee9289e11f72840859",
+  "sha256_zip": "e8d23ed1a766ed227b7117f2fb58d03740ada2602e1d6489b52abe319085699d",
+  "kaggle_version": 2,
+  "license_reported": "CC0: Public Domain",
+  "audit": {
+    "rows": 800,
+    "columns": 19,
+    "missing_cells": 0,
+    "duplicates": 0,
+    "positive_labels": 400,
+    "prevalence": 0.5,
+    "athlete_id_available": false,
+    "event_dates_available": false,
+    "bmi_max_recalculation_error": 3.552713678800501e-15,
+    "stress_values_above_article_PSS10_max40": 715,
+    "sprint_named_seconds_range": [
+      4.862435363380129,
+      6.898227865283558
+    ]
+  },
+  "features": [
+    "Age",
+    "Height_cm",
+    "Weight_kg",
+    "Training_Hours_Per_Week",
+    "Matches_Played_Past_Season",
+    "Previous_Injury_Count",
+    "Knee_Strength_Score",
+    "Hamstring_Flexibility",
+    "Reaction_Time_ms",
+    "Balance_Test_Score",
+    "Sprint_Speed_10m_s",
+    "Agility_Score",
+    "Sleep_Hours_Per_Night",
+    "Stress_Level_Score",
+    "Nutrition_Quality_Score",
+    "Warmup_Routine_Adherence",
+    "BMI",
+    "Position"
+  ],
+  "target": "Injury_Next_Season",
+  "label_semantics_verified": false,
+  "clinical_7d_eligible": false,
+  "validation": "5-fold stratified OOF by row; RF calibration internal cv=3; no athlete IDs to verify identities",
+  "metrics_label_classification_oof": {
+    "prevalencia": {
+      "roc_auc": 0.5,
+      "average_precision": 0.5,
+      "brier": 0.25,
+      "log_loss": 0.6931471805599452,
+      "auc_bootstrap_95_conditional": [
+        0.5,
+        0.5
+      ]
+    },
+    "logistica": {
+      "roc_auc": 0.9899875,
+      "average_precision": 0.9901107647419457,
+      "brier": 0.03893959893194936,
+      "log_loss": 0.12980014430259726,
+      "auc_bootstrap_95_conditional": [
+        0.9850519345235345,
+        0.9938851944359668
+      ]
+    },
+    "rf_sigmoid": {
+      "roc_auc": 0.98448125,
+      "average_precision": 0.984292356454691,
+      "brier": 0.04728975662878915,
+      "log_loss": 0.16339760243571141,
+      "auc_bootstrap_95_conditional": [
+        0.9775223435306645,
+        0.9901806931076556
+      ]
+    }
+  },
+  "spearman": {
+    "Age": 0.020774735456034917,
+    "Height_cm": -0.05301287139989068,
+    "Weight_kg": 0.016501045442702013,
+    "Training_Hours_Per_Week": 0.028465416560394523,
+    "Matches_Played_Past_Season": -0.04478864303256967,
+    "Previous_Injury_Count": 0.38075189995597486,
+    "Knee_Strength_Score": -0.46237132430825,
+    "Hamstring_Flexibility": -0.4568504080459067,
+    "Reaction_Time_ms": 0.4817161818784608,
+    "Balance_Test_Score": -0.4991018192099071,
+    "Sprint_Speed_10m_s": -0.4763901214842002,
+    "Agility_Score": -0.4010350506644012,
+    "Sleep_Hours_Per_Night": -0.5158809107489618,
+    "Stress_Level_Score": 0.540021387739208,
+    "Nutrition_Quality_Score": -0.42244753190443424,
+    "Warmup_Routine_Adherence": -0.2650888463670312,
+    "BMI": 0.036367801192291424
+  },
+  "sleep_stress_strata": [
+    {
+      "sleep_group": "Sono baixo",
+      "stress_group": "Estresse baixo",
+      "sum": 23,
+      "count": 57,
+      "mean": 0.40350877192982454
+    },
+    {
+      "sleep_group": "Sono baixo",
+      "stress_group": "Estresse médio",
+      "sum": 75,
+      "count": 88,
+      "mean": 0.8522727272727273
+    },
+    {
+      "sleep_group": "Sono baixo",
+      "stress_group": "Estresse alto",
+      "sum": 114,
+      "count": 122,
+      "mean": 0.9344262295081968
+    },
+    {
+      "sleep_group": "Sono médio",
+      "stress_group": "Estresse baixo",
+      "sum": 20,
+      "count": 89,
+      "mean": 0.2247191011235955
+    },
+    {
+      "sleep_group": "Sono médio",
+      "stress_group": "Estresse médio",
+      "sum": 37,
+      "count": 90,
+      "mean": 0.4111111111111111
+    },
+    {
+      "sleep_group": "Sono médio",
+      "stress_group": "Estresse alto",
+      "sum": 75,
+      "count": 87,
+      "mean": 0.8620689655172413
+    },
+    {
+      "sleep_group": "Sono alto",
+      "stress_group": "Estresse baixo",
+      "sum": 9,
+      "count": 121,
+      "mean": 0.0743801652892562
+    },
+    {
+      "sleep_group": "Sono alto",
+      "stress_group": "Estresse médio",
+      "sum": 20,
+      "count": 88,
+      "mean": 0.22727272727272727
+    },
+    {
+      "sleep_group": "Sono alto",
+      "stress_group": "Estresse alto",
+      "sum": 27,
+      "count": 58,
+      "mean": 0.46551724137931033
+    }
+  ],
+  "limitations": [
+    "Article inconsistently describes observed injury and assessed high risk",
+    "Article states data are not a real-world clinical prospective cohort",
+    "Stress scale conflicts with PSS-10 range stated in article",
+    "Sprint column name and units require clarification",
+    "No athlete IDs, event dates, clinical diagnoses or external validation",
+    "Balanced labels are not a population injury incidence estimate"
+  ]
+}
